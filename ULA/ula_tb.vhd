@@ -1,70 +1,85 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity ula_tb is
-end ula_tb;
+ENTITY ULA_TB IS
+END;
 
-architecture testbench of ula_tb is
-
-  -- Component declaration for the DUT (Design Under Test)
-  component ula
-    port (
-      data_in_A : in  unsigned (15 downto 0);
-      data_in_B : in  unsigned (15 downto 0);
-      result_out : out  unsigned (15 downto 0);
-      flag_out : out  std_logic
+ARCHITECTURE A_ULA_TB OF ULA_TB IS
+    COMPONENT ULA IS
+        PORT (
+            data_in_A : IN unsigned(15 DOWNTO 0);
+            data_in_B : IN unsigned(15 DOWNTO 0);
+            op : IN unsigned(1 DOWNTO 0);
+            result_out : OUT unsigned(15 DOWNTO 0);
+            zero_out : OUT STD_LOGIC
+        );
+    END COMPONENT;
+    SIGNAL data_in_A, data_in_B, result_out : unsigned(15 DOWNTO 0);
+    SIGNAL op : unsigned(1 DOWNTO 0);
+    SIGNAL zero_out : STD_LOGIC;
+BEGIN
+    uut : ULA PORT MAP(
+        data_in_A => data_in_A,
+        data_in_B => data_in_B,
+        op => op,
+        result_out => result_out,
+        zero_out => zero_out
     );
-  end component;
+    PROCESS
+    BEGIN
+        -- Teste com soma
+        op <= "00";
+        data_in_A <= x"0005";
+        data_in_B <= x"0002";
+        WAIT FOR 10 ns;
+        
+        data_in_A <= x"0010";
+        data_in_B <= x"0050";
+        WAIT FOR 10 ns;
+        
+        data_in_A <= x"1010";
+        data_in_B <= x"0401";
+        WAIT FOR 10 ns;
 
-  -- Input signal declarations
-  signal data_in_A : unsigned (15 downto 0) := (others => '0');
-  signal data_in_B : unsigned (15 downto 0) := (others => '0');
+        -- Teste com subtração
+        op <= "01";
+        data_in_A <= x"0005";
+        data_in_B <= x"0002";
+        WAIT FOR 10 ns;
+        
+        data_in_A <= x"1000";
+        data_in_B <= x"0500";
+        WAIT FOR 10 ns;
+        
+        data_in_A <= x"0007";
+        data_in_B <= x"0001";
+        WAIT FOR 10 ns;
 
-  -- Output signal declarations
-  signal result_out : unsigned (15 downto 0);
-  signal flag_out : std_logic;
+        -- Teste com comparação igual
+        op <= "10";
+        data_in_A <= x"0005";
+        data_in_B <= x"0005";
+        WAIT FOR 10 ns;
+        
+        data_in_A <= x"0011";
+        data_in_B <= x"0005";
+        WAIT FOR 10 ns;
 
-begin
+        -- Teste com comparação maior
+        op <= "11";
+        data_in_A <= x"0005";
+        data_in_B <= x"0002";
+        WAIT FOR 10 ns;
 
-  -- Instantiate the DUT
-  DUT: ula port map (
-    data_in_A => data_in_A,
-    data_in_B => data_in_B,
-    result_out => result_out,
-    flag_out => flag_out
-  );
+        data_in_A <= x"0002";
+        data_in_B <= x"0005";
+        WAIT FOR 10 ns;
 
-  -- Stimulus process
-  stim_proc: process
-  begin
-    -- Test 1: Addition Test
-    data_in_A <= to_unsigned(10, 16);
-    data_in_B <= to_unsigned(20, 16);
-    wait for 10 ns;
-    assert result_out = to_unsigned(30, 16) report "Addition Test Failed!" severity error;
+        data_in_A <= x"0010";
+        data_in_B <= x"0002";
+        WAIT FOR 10 ns;
 
-    -- Test 2: Subtraction Test
-    data_in_A <= to_unsigned(50, 16);
-    data_in_B <= to_unsigned(25, 16);
-    wait for 10 ns;
-    assert result_out = to_unsigned(25, 16) report "Subtraction Test Failed!" severity error;
-
-    -- Test 3: Comparison Test 1
-    data_in_A <= to_unsigned(100, 16);
-    data_in_B <= to_unsigned(50, 16);
-    wait for 10 ns;
-    assert flag_out = '1' report "Comparison Test 1 Failed!" severity error;
-
-    -- Test 4: Comparison Test 2
-    data_in_A <= to_unsigned(50, 16);
-    data_in_B <= to_unsigned(100, 16);
-    wait for 10 ns;
-    assert flag_out = '0' report "Comparison Test 2 Failed!" severity error;
-
-    -- End the simulation
-    wait;
-  end process;
-
-end testbench;
-
+        WAIT;
+    END PROCESS;
+END A_ULA_TB;

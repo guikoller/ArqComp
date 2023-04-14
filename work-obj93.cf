@@ -1,0 +1,7 @@
+v 4
+file . "register_bank.vhd" "d5b4409f9de37b5636e9cb1757545b4ace78f67a" "20230414173234.686":
+  entity register_bank at 1( 0) + 0 on 13;
+  architecture behavioral of register_bank at 16( 463) + 0 on 14;
+file . "register_unit.vhd" "60b486e33e96e646be72af8d6d5fb3deeb8f006e" "20230414182001.841":
+  entity register_unit at 1( 0) + 0 on 17;
+  architecture a_register_unit of register_unit at 13( 317) + 0 on 18;

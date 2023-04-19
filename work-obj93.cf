@@ -1,7 +1,10 @@
 v 4
-file . "register_bank.vhd" "d5b4409f9de37b5636e9cb1757545b4ace78f67a" "20230414173234.686":
-  entity register_bank at 1( 0) + 0 on 13;
-  architecture behavioral of register_bank at 16( 463) + 0 on 14;
-file . "register_unit.vhd" "60b486e33e96e646be72af8d6d5fb3deeb8f006e" "20230414182001.841":
-  entity register_unit at 1( 0) + 0 on 17;
-  architecture a_register_unit of register_unit at 13( 317) + 0 on 18;
+file . "register_bank_tb.vhd" "d87e890fcab445099923e6a30dfaffe2c2d69593" "20230419202532.579":
+  entity register_bank_tb at 1( 0) + 0 on 33;
+  architecture a_register_bank_tb of register_bank_tb at 8( 127) + 0 on 34;
+file . "register_unit.vhd" "b9e8cc3a893997df17eb05e7b0882848d7912a29" "20230419202524.300":
+  entity register_unit at 1( 0) + 0 on 29;
+  architecture a_register_unit of register_unit at 13( 317) + 0 on 30;
+file . "register_bank.vhd" "36f450d6322330c2c668c616f58e5c1640c963f6" "20230419203556.246":
+  entity register_bank at 1( 0) + 0 on 39;
+  architecture a_register_bank of register_bank at 15( 393) + 0 on 40;

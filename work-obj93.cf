@@ -1,10 +1,16 @@
 v 4
-file . "register_bank_tb.vhd" "8ba7bfed4bc70cea857075a2aea302e60f68ae7f" "20230420190351.073":
-  entity register_bank_tb at 1( 0) + 0 on 47;
-  architecture a_register_bank_tb of register_bank_tb at 8( 127) + 0 on 48;
-file . "register_unit.vhd" "b9e8cc3a893997df17eb05e7b0882848d7912a29" "20230420185926.558":
-  entity register_unit at 1( 0) + 0 on 41;
-  architecture a_register_unit of register_unit at 13( 317) + 0 on 42;
-file . "register_bank.vhd" "36f450d6322330c2c668c616f58e5c1640c963f6" "20230420185933.698":
-  entity register_bank at 1( 0) + 0 on 43;
-  architecture a_register_bank of register_bank at 15( 393) + 0 on 44;
+file . "Lab1_TopLevel.vhd" "f1aa7f072fd572bb546aa86a7aa596e59db32107" "20230420202812.049":
+  entity lab1_toplevel at 1( 0) + 0 on 17;
+  architecture a_lab1_toplevel of lab1_toplevel at 20( 619) + 0 on 18;
+file . "register_unit.vhd" "b9e8cc3a893997df17eb05e7b0882848d7912a29" "20230420202758.396":
+  entity register_unit at 1( 0) + 0 on 13;
+  architecture a_register_unit of register_unit at 13( 317) + 0 on 14;
+file . "ula.vhd" "1b8f3934cb03fa4acc94af8e22e657577ccdd4b8" "20230420202748.116":
+  entity ula at 1( 0) + 0 on 11;
+  architecture a_ula of ula at 15( 323) + 0 on 12;
+file . "register_bank.vhd" "36f450d6322330c2c668c616f58e5c1640c963f6" "20230420202803.129":
+  entity register_bank at 1( 0) + 0 on 15;
+  architecture a_register_bank of register_bank at 15( 393) + 0 on 16;
+file . "Lab1_TopLevel_tb.vhd" "951748263ea314b16ddd143fd137655170c0cfb4" "20230420202829.895":
+  entity lab1_toplevel_tb at 1( 0) + 0 on 21;
+  architecture a_lab1_toplevel_tb of lab1_toplevel_tb at 8( 127) + 0 on 22;

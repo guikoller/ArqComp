@@ -1,10 +1,10 @@
 v 4
-file . "register_bank_tb.vhd" "d87e890fcab445099923e6a30dfaffe2c2d69593" "20230419202532.579":
-  entity register_bank_tb at 1( 0) + 0 on 33;
-  architecture a_register_bank_tb of register_bank_tb at 8( 127) + 0 on 34;
-file . "register_unit.vhd" "b9e8cc3a893997df17eb05e7b0882848d7912a29" "20230419202524.300":
-  entity register_unit at 1( 0) + 0 on 29;
-  architecture a_register_unit of register_unit at 13( 317) + 0 on 30;
-file . "register_bank.vhd" "36f450d6322330c2c668c616f58e5c1640c963f6" "20230419203556.246":
-  entity register_bank at 1( 0) + 0 on 39;
-  architecture a_register_bank of register_bank at 15( 393) + 0 on 40;
+file . "register_bank_tb.vhd" "8ba7bfed4bc70cea857075a2aea302e60f68ae7f" "20230420190351.073":
+  entity register_bank_tb at 1( 0) + 0 on 47;
+  architecture a_register_bank_tb of register_bank_tb at 8( 127) + 0 on 48;
+file . "register_unit.vhd" "b9e8cc3a893997df17eb05e7b0882848d7912a29" "20230420185926.558":
+  entity register_unit at 1( 0) + 0 on 41;
+  architecture a_register_unit of register_unit at 13( 317) + 0 on 42;
+file . "register_bank.vhd" "36f450d6322330c2c668c616f58e5c1640c963f6" "20230420185933.698":
+  entity register_bank at 1( 0) + 0 on 43;
+  architecture a_register_bank of register_bank at 15( 393) + 0 on 44;

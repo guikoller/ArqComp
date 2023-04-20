@@ -44,12 +44,6 @@ BEGIN
 
     -- Geração de clock
     clk_process : PROCESS
-        -- Initialize signals
-        selec_reg_a <= (OTHERS => '0');
-        selec_reg_b <= (OTHERS => '0');
-        selec_reg_write <= (OTHERS => '0');
-        write_data <= (OTHERS => '0');
-        write_enable <= '0';
     BEGIN
         WHILE now < 1000 ns LOOP
             clk <= '0';
@@ -62,12 +56,6 @@ BEGIN
 
     -- Reset inicial
     reset_process : PROCESS
-        -- Initialize signals
-        selec_reg_a <= (others => '0');
-        selec_reg_b <= (others => '0');
-        selec_reg_write <= (others => '0');
-        write_data <= (others => '0');
-        write_enable <= '0';
     BEGIN
         rst <= '1';
         WAIT FOR 20 ns;

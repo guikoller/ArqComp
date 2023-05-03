@@ -89,7 +89,7 @@ BEGIN
         WAIT FOR 40 ns;
 
         -- Test 4: read address 255
-        address <=  x"10";
+        address <=  x"FF";
         WAIT FOR 40 ns;
 
         WAIT;

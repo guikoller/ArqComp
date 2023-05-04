@@ -15,5 +15,7 @@ rm -r work-obj93.cf
 ./ghdl.sh pc_rom_tb
 ./ghdl.sh state_machine
 ./ghdl.sh state_machine_tb
+./ghdl.sh control_unit
+./ghdl.sh control_unit_tb
 ./ghdl.sh top_level
 ./ghdl.sh top_level_tb

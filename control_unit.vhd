@@ -18,28 +18,24 @@ ARCHITECTURE a_control_unit OF control_unit IS
         );
     END COMPONENT;
 
-    SIGNAL op : unsigned(3 DOWNTO 0);
-    SIGNAL temp_data_out : unsigned (15 DOWNTO 0);
-    SIGNAL jump_en : STD_LOGIC;
-BEGIN
-    temp_data_out <= data_out;
-    -- opcode in 4 bits MSB
-    op <= data_out(15 DOWNTO 12);
+    COMPONENT state_machine IS
+        PORT (
+            clk, rst : IN STD_LOGIC;
+            state : OUT STD_LOGIC
+        );
+    END COMPONENT;
 
-    --jump: opcode 1110
-    jump_en <= '1' WHEN op = "1110" ELSE
-        '0';
+    SIGNAL sig_data_out : unsigned (15 DOWNTO 0);
+    signal sig_op : unsigned (3 downto 0);
+    SIGNAL sig_state : std_logic;
 
-    -- instantiate pc_rom component
-    pc_rom_inst : pc_rom
-    PORT MAP(
-        clk => clk,
-        write_enable => write_enable,
-        rst => rst,
-        data_out => temp_data_out
-    );
+    begin
+        st_machine: state_machine port map (
+            clk => clk,
+            rst => rst,
+            state
+            );
 
-    -- increment data_out by 3 when jump_en is '1'
-    data_out <= temp_data_out + 3 WHEN jump_en = '1' ELSE
-        data_out + 0;
+        
+
 END ARCHITECTURE a_control_unit;

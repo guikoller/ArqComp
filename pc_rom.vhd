@@ -20,7 +20,7 @@ ARCHITECTURE a_pc_rom OF pc_rom IS
     COMPONENT rom IS
         PORT (
             clk : IN STD_LOGIC;
-            address : IN unsigned(7 DOWNTO 0);
+            address : IN unsigned(15 DOWNTO 0);
             data : OUT unsigned (15 DOWNTO 0)
         );
     END COMPONENT;
@@ -39,7 +39,7 @@ BEGIN
     read_only_memory : rom
     PORT MAP(
         clk => clk,
-        address => output_pc(7 downto 0),
+        address => output_pc,
         data => data_out
     );
 

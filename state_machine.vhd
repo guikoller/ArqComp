@@ -15,7 +15,7 @@ BEGIN
     PROCESS (clk, rst) 
     BEGIN
         IF rst = '1' THEN
-            output <= '1';
+            output <= '0';
         ELSIF rising_edge(clk) THEN
             output <= NOT output;
         end IF;

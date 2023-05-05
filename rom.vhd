@@ -5,7 +5,7 @@ USE ieee.numeric_std.ALL;
 ENTITY rom IS
     PORT (
         clk : IN STD_LOGIC;
-        address : IN unsigned (7 DOWNTO 0); --MOS 6502 has 8 bit address, which means 256 addresses
+        address : IN unsigned (15 DOWNTO 0); --MOS 6502 has 8 bit address, which means 256 addresses
         data : OUT unsigned (15 DOWNTO 0) --The processor has 16 bit data width
     );
 END rom;

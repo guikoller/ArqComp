@@ -5,7 +5,7 @@ USE IEEE.numeric_std.ALL;
 ENTITY pc_rom IS
     PORT (
         clk, write_enable, rst : IN STD_LOGIC;
-        data_out : OUT unsigned(15 DOWNTO 0)
+        data_out, address : OUT unsigned(15 DOWNTO 0)
     );
 END ENTITY pc_rom;
 
@@ -42,5 +42,7 @@ BEGIN
         address => output_pc,
         data => data_out
     );
+
+    address <= output_pc;
 
 END ARCHITECTURE a_pc_rom;

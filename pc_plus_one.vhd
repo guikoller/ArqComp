@@ -23,7 +23,7 @@ ARCHITECTURE a_pc_plus_one OF pc_plus_one IS
         PORT (
             data_in : IN unsigned(15 DOWNTO 0);
             clk : IN STD_LOGIC;
-            data_out : OUT unsigned(15 DOWNTO 0)
+            data_out : INOUT unsigned(15 DOWNTO 0)
         );
     END COMPONENT;
 

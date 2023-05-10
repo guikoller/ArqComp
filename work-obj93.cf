@@ -1,58 +1,58 @@
 v 4
-file . "control_unit_tb.vhd" "48a12e7ce1b5f75b96d35b20340bc175b12a2ef9" "20230507231729.510":
-  entity control_unit_tb at 1( 0) + 0 on 57;
-  architecture a_control_unit_tb of control_unit_tb at 8( 125) + 0 on 58;
-file . "top_level.vhd" "727d61febd653ca303a83b59a1eb0c2f8ded9a1f" "20230507231628.052":
-  entity top_level at 1( 0) + 0 on 45;
-  architecture a_top_level of top_level at 19( 533) + 0 on 46;
-file . "state_machine_tb.vhd" "26def0b1dfff17e5b8b1cc869092c44e47fc9f83" "20230507231627.847":
-  entity state_machine_tb at 1( 0) + 0 on 41;
-  architecture a_state_machine_tb of state_machine_tb at 8( 120) + 0 on 42;
-file . "pc_rom_tb.vhd" "836a7656b37c24d8f261d1fe30293a37137b4af5" "20230507231627.633":
-  entity pc_rom_tb at 1( 0) + 0 on 37;
-  architecture a_pc_rom_tb of pc_rom_tb at 8( 113) + 0 on 38;
-file . "pc_plus_one_tb.vhd" "5d779edebf63b4fd6de92308e2890d1407552ccd" "20230507231627.437":
-  entity pc_plus_one_tb at 1( 0) + 0 on 33;
-  architecture a_pc_plus_one_tb of pc_plus_one_tb at 8( 116) + 0 on 34;
-file . "plus_one.vhd" "600d6ab9a7a1d585f3999a678950cdab1e60f94c" "20230507231627.254":
-  entity plus_one at 1( 0) + 0 on 29;
-  architecture a_plus_one of plus_one at 13( 239) + 0 on 30;
-file . "rom_tb.vhd" "6c1e1f1a6e9f42e100a386f3f5767987107300ed" "20230507231627.088":
-  entity rom_tb at 1( 0) + 0 on 25;
-  architecture a_rom_tb of rom_tb at 8( 100) + 0 on 26;
-file . "register_bank.vhd" "36f450d6322330c2c668c616f58e5c1640c963f6" "20230507231626.714":
-  entity register_bank at 1( 0) + 0 on 17;
-  architecture a_register_bank of register_bank at 15( 393) + 0 on 18;
-file . "ula_tb.vhd" "42d925eb2311878fced5eefb3f70eb14554a1da3" "20230507231626.537":
-  entity ula_tb at 1( 0) + 0 on 13;
-  architecture a_ula_tb of ula_tb at 8( 93) + 0 on 14;
-file . "ula.vhd" "1b8f3934cb03fa4acc94af8e22e657577ccdd4b8" "20230507231626.912":
-  entity ula at 1( 0) + 0 on 21;
-  architecture a_ula of ula at 15( 323) + 0 on 22;
-file . "register_unit.vhd" "b9e8cc3a893997df17eb05e7b0882848d7912a29" "20230507231626.625":
-  entity register_unit at 1( 0) + 0 on 15;
-  architecture a_register_unit of register_unit at 13( 317) + 0 on 16;
-file . "register_bank_tb.vhd" "6623e4f4aed44a91d873c4be7f1f08d0f7310a4a" "20230507231626.810":
-  entity register_bank_tb at 1( 0) + 0 on 19;
-  architecture a_register_bank_tb of register_bank_tb at 8( 127) + 0 on 20;
-file . "rom.vhd" "af56b75c828e07fa2daba9e240f93139308c2d34" "20230507231627.001":
-  entity rom at 1( 0) + 0 on 23;
-  architecture a_rom of rom at 13( 321) + 0 on 24;
-file . "program_counter.vhd" "78be7a4a858f9d98d3c4eb5023edf56a246f4a2e" "20230507231627.176":
-  entity program_counter at 1( 0) + 0 on 27;
-  architecture a_program_counter of program_counter at 14( 280) + 0 on 28;
-file . "pc_plus_one.vhd" "538a7fa1ffbf86264dfad50bd1aed096497b23fb" "20230507231627.343":
-  entity pc_plus_one at 1( 0) + 0 on 31;
-  architecture a_pc_plus_one of pc_plus_one at 12( 227) + 0 on 32;
-file . "pc_rom.vhd" "ed268c7ab1aec30a5ca93d53498a634dd815c6c5" "20230507231627.542":
-  entity pc_rom at 1( 0) + 0 on 35;
-  architecture a_pc_rom of pc_rom at 12( 226) + 0 on 36;
-file . "state_machine.vhd" "83b69cb60147b86b4ea81beabd2beba352c71342" "20230507231627.757":
+file . "top_level.vhd" "727d61febd653ca303a83b59a1eb0c2f8ded9a1f" "20230510202714.464":
+  entity top_level at 1( 0) + 0 on 47;
+  architecture a_top_level of top_level at 19( 533) + 0 on 48;
+file . "control_unit.vhd" "4365c0cc633f1618e5136c5ee00aaf8751a366bb" "20230510202714.339":
+  entity control_unit at 1( 0) + 0 on 43;
+  architecture a_control_unit of control_unit at 13( 274) + 0 on 44;
+file . "state_machine.vhd" "83b69cb60147b86b4ea81beabd2beba352c71342" "20230510202714.222":
   entity state_machine at 1( 0) + 0 on 39;
   architecture a_state_machine of state_machine at 12( 195) + 0 on 40;
-file . "control_unit.vhd" "792cf6bba02c22341ebad57a356cace552d0ea54" "20230507231720.975":
-  entity control_unit at 1( 0) + 0 on 53;
-  architecture a_control_unit of control_unit at 13( 274) + 0 on 54;
-file . "top_level_tb.vhd" "03e60c6c485027d84cf6e9734fee4a163fe49478" "20230507231628.168":
-  entity top_level_tb at 1( 0) + 0 on 47;
-  architecture a_top_level_tb of top_level_tb at 8( 119) + 0 on 48;
+file . "pc_rom.vhd" "ed268c7ab1aec30a5ca93d53498a634dd815c6c5" "20230510202714.097":
+  entity pc_rom at 1( 0) + 0 on 35;
+  architecture a_pc_rom of pc_rom at 12( 226) + 0 on 36;
+file . "pc_plus_one.vhd" "1ff0ec961e18ca5679f8b844be9e6fc66a1e8043" "20230510202713.979":
+  entity pc_plus_one at 1( 0) + 0 on 31;
+  architecture a_pc_plus_one of pc_plus_one at 12( 227) + 0 on 32;
+file . "program_counter.vhd" "78be7a4a858f9d98d3c4eb5023edf56a246f4a2e" "20230510202713.866":
+  entity program_counter at 1( 0) + 0 on 27;
+  architecture a_program_counter of program_counter at 14( 280) + 0 on 28;
+file . "rom.vhd" "af56b75c828e07fa2daba9e240f93139308c2d34" "20230510202713.754":
+  entity rom at 1( 0) + 0 on 23;
+  architecture a_rom of rom at 13( 321) + 0 on 24;
+file . "register_bank_tb.vhd" "6623e4f4aed44a91d873c4be7f1f08d0f7310a4a" "20230510202713.634":
+  entity register_bank_tb at 1( 0) + 0 on 19;
+  architecture a_register_bank_tb of register_bank_tb at 8( 127) + 0 on 20;
+file . "register_unit.vhd" "b9e8cc3a893997df17eb05e7b0882848d7912a29" "20230510202713.516":
+  entity register_unit at 1( 0) + 0 on 15;
+  architecture a_register_unit of register_unit at 13( 317) + 0 on 16;
+file . "ula.vhd" "1b8f3934cb03fa4acc94af8e22e657577ccdd4b8" "20230510202713.697":
+  entity ula at 1( 0) + 0 on 21;
+  architecture a_ula of ula at 15( 323) + 0 on 22;
+file . "ula_tb.vhd" "42d925eb2311878fced5eefb3f70eb14554a1da3" "20230510202713.454":
+  entity ula_tb at 1( 0) + 0 on 13;
+  architecture a_ula_tb of ula_tb at 8( 93) + 0 on 14;
+file . "register_bank.vhd" "36f450d6322330c2c668c616f58e5c1640c963f6" "20230510202713.572":
+  entity register_bank at 1( 0) + 0 on 17;
+  architecture a_register_bank of register_bank at 15( 393) + 0 on 18;
+file . "rom_tb.vhd" "6c1e1f1a6e9f42e100a386f3f5767987107300ed" "20230510202713.808":
+  entity rom_tb at 1( 0) + 0 on 25;
+  architecture a_rom_tb of rom_tb at 8( 100) + 0 on 26;
+file . "plus_one.vhd" "600d6ab9a7a1d585f3999a678950cdab1e60f94c" "20230510202713.924":
+  entity plus_one at 1( 0) + 0 on 29;
+  architecture a_plus_one of plus_one at 13( 239) + 0 on 30;
+file . "pc_plus_one_tb.vhd" "5d779edebf63b4fd6de92308e2890d1407552ccd" "20230510202714.036":
+  entity pc_plus_one_tb at 1( 0) + 0 on 33;
+  architecture a_pc_plus_one_tb of pc_plus_one_tb at 8( 116) + 0 on 34;
+file . "pc_rom_tb.vhd" "836a7656b37c24d8f261d1fe30293a37137b4af5" "20230510202714.157":
+  entity pc_rom_tb at 1( 0) + 0 on 37;
+  architecture a_pc_rom_tb of pc_rom_tb at 8( 113) + 0 on 38;
+file . "state_machine_tb.vhd" "26def0b1dfff17e5b8b1cc869092c44e47fc9f83" "20230510202714.281":
+  entity state_machine_tb at 1( 0) + 0 on 41;
+  architecture a_state_machine_tb of state_machine_tb at 8( 120) + 0 on 42;
+file . "control_unit_tb.vhd" "b0fef86af4e4c1d3c44c8c858daffd0564237983" "20230510202716.503":
+  entity control_unit_tb at 1( 0) + 0 on 51;
+  architecture a_control_unit_tb of control_unit_tb at 8( 125) + 0 on 52;
+file . "top_level_tb.vhd" "03e60c6c485027d84cf6e9734fee4a163fe49478" "20230510202714.529":
+  entity top_level_tb at 1( 0) + 0 on 49;
+  architecture a_top_level_tb of top_level_tb at 8( 119) + 0 on 50;

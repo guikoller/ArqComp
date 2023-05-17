@@ -22,7 +22,7 @@ BEGIN
                 -- Soma
                 temp <= data_in_A + data_in_B;
 
-                IF data_in_A(15) = '1' AND data_in_B(15) = '1' THEN
+                IF data_in_A(0) = '1' AND data_in_B(0) = '1' THEN
                     carry <= '1';
                 ELSE
                     carry <= '0';

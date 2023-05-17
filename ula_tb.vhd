@@ -41,14 +41,26 @@ BEGIN
     PROCESS
     BEGIN
         -- Testcase 1: Addition
+        operation <= "0000";
         data_A <= "1000000000000010";
         data_B <= "1000000000000011";
-        operation <= "0000";
+        WAIT FOR 10 ns;
+
+        data_A <= x"0006";
+        data_B <= x"FFFF";
+        WAIT FOR 10 ns;
+
+        data_A <= x"0006";
+        data_B <= x"0006";
+        WAIT FOR 10 ns;
+
+        data_A <= x"0125";
+        data_B <= x"0A56";
         WAIT FOR 10 ns;
 
         -- Testcase 2: Subtraction
         data_A <= "0000000000000011";
-        data_B <= "0000000000000010";
+        data_B <= "0000000000000110";
         operation <= "0001";
         WAIT FOR 10 ns;
 

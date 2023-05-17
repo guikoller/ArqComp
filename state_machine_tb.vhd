@@ -7,20 +7,20 @@ END state_machine_tb;
 
 ARCHITECTURE a_state_machine_tb OF state_machine_tb IS
 
-    SIGNAL clk,rst : STD_LOGIC := '0';
-    SIGNAL state : STD_LOGIC := '0';
+    SIGNAL clk, rst : STD_LOGIC := '0';
+    SIGNAL state : UNSIGNED(1 DOWNTO 0) := (OTHERS => '0');
 
     COMPONENT state_machine
         PORT (
             clk, rst : IN STD_LOGIC;
-            state : OUT STD_LOGIC
+            state : OUT UNSIGNED(1 DOWNTO 0)
         );
     END COMPONENT;
 
 BEGIN
 
     uut : state_machine
-    PORT MAP (
+    PORT MAP(
         clk => clk,
         rst => rst,
         state => state

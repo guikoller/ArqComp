@@ -6,7 +6,7 @@ ENTITY ULA IS
     PORT (
         data_in_A : IN unsigned(15 DOWNTO 0);
         data_in_B : IN unsigned(15 DOWNTO 0);
-        op : IN unsigned(3 DOWNTO 0);
+        op : IN unsigned(1 DOWNTO 0);
         result_out : OUT unsigned(15 DOWNTO 0);
         zero_out, negative_out, carry_out, overflow_out : OUT STD_LOGIC
     );
@@ -18,7 +18,7 @@ ARCHITECTURE A_ULA OF ULA IS
 BEGIN
     PROCESS (data_in_A, data_in_B, op) BEGIN
         CASE op IS
-            WHEN "0000" =>
+            WHEN "00" =>
                 -- Soma
                 temp <= data_in_A + data_in_B;
 
@@ -34,7 +34,7 @@ BEGIN
                     overflow <= '0';
                 END IF;
 
-            WHEN "0001" =>
+            WHEN "01" =>
                 -- Subtração
                 temp <= data_in_A - data_in_B;
 
@@ -43,14 +43,14 @@ BEGIN
                 ELSE
                     negative <= '0';
                 END IF;
-            WHEN "0010" =>
+            WHEN "10" =>
                 -- Comparação igual
                 IF data_in_A = data_in_B THEN
                     temp <= "0000000000000001";
                 ELSE
                     temp <= "0000000000000000";
                 END IF;
-            WHEN "0011" =>
+            WHEN "11" =>
                 -- Comparação maior
                 IF data_in_A > data_in_B THEN
                     temp <= "0000000000000001";

@@ -20,15 +20,7 @@ ARCHITECTURE a_pc_plus_one OF pc_plus_one IS
         );
     END COMPONENT;
 
-    COMPONENT plus_one IS
-        PORT (
-            data_in : IN unsigned(15 DOWNTO 0);
-            clk : IN STD_LOGIC;
-            data_out : OUT unsigned(15 DOWNTO 0)
-        );
-    END COMPONENT;
-
-    SIGNAL output_pc, output_plus_one, pc_in : unsigned (15 DOWNTO 0);
+    SIGNAL output_pc, pc_in : unsigned (15 DOWNTO 0);
 
 BEGIN
     pc: program_counter
@@ -40,13 +32,6 @@ BEGIN
             data_out => output_pc
         );
 
-    count_one: plus_one
-        PORT MAP (
-            data_in => output_pc,
-            clk => clk,
-            data_out => output_plus_one
-        );
-
-    pc_in <= address when branch = '1' else output_plus_one;
+    pc_in <= address when branch = '1' else pc_in + 1;
     data_out <= output_pc;
 END ARCHITECTURE a_pc_plus_one;

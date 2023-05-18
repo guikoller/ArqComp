@@ -9,10 +9,6 @@ ENTITY control_unit IS
         clk, write_enable, rst : IN STD_LOGIC;
         state_out : OUT unsigned (1 DOWNTO 0);
         data_out : OUT unsigned(15 DOWNTO 0)
-        -- selec_reg_a, selec_reg_b : IN unsigned (2 DOWNTO 0);
-        -- selec_reg_write : IN unsigned (2 DOWNTO 0);
-        -- write_data : IN unsigned (15 DOWNTO 0);
-        -- reg_data_a, reg_data_b : INOUT unsigned (15 DOWNTO 0)
     );
 END ENTITY control_unit;
 
@@ -40,16 +36,6 @@ ARCHITECTURE a_control_unit OF control_unit IS
         );
     END COMPONENT;
 
-    -- COMPONENT register_bank IS
-    --     PORT (
-    --         selec_reg_a, selec_reg_b : IN unsigned (2 DOWNTO 0);
-    --         selec_reg_write : IN unsigned (2 DOWNTO 0);
-    --         write_data : IN unsigned (15 DOWNTO 0);
-    --         write_enable, clk, rst : IN STD_LOGIC;
-    --         reg_data_a, reg_data_b : OUT unsigned (15 DOWNTO 0)
-    --     );
-    -- END COMPONENT;
-
     SIGNAL data_output : unsigned (15 DOWNTO 0);
     SIGNAL pc_output : unsigned (15 DOWNTO 0);
     SIGNAL address : unsigned (15 DOWNTO 0);
@@ -58,10 +44,6 @@ ARCHITECTURE a_control_unit OF control_unit IS
     SIGNAL branch : STD_LOGIC;
     SIGNAL write_en_pc : STD_LOGIC;
     SIGNAL write_en_reg : STD_LOGIC;
-    -- SIGNAL selec_reg_a_temp : unsigned (2 DOWNTO 0);
-    -- SIGNAL selec_reg_b_temp : unsigned (2 DOWNTO 0);
-    -- SIGNAL selec_reg_write_temp : unsigned (2 DOWNTO 0);
-    -- SIGNAL reg_data_a_temp, reg_data_b_temp : unsigned (15 DOWNTO 0);
 BEGIN
     st_machine : state_machine
     PORT MAP(
@@ -87,19 +69,6 @@ BEGIN
         data => data_output
     );
 
-    -- reg_bank : register_bank
-    -- PORT MAP(
-    --     selec_reg_a => selec_reg_a_temp,
-    --     selec_reg_b => selec_reg_b_temp,
-    --     selec_reg_write => selec_reg_write_temp,
-    --     write_data => write_data,
-    --     write_enable => write_en_reg,
-    --     clk => clk,
-    --     rst => rst,
-    --     reg_data_a => reg_data_a_temp,
-    --     reg_data_b => reg_data_b_temp
-    -- );
-
     write_en_pc <= '1' WHEN state = "00" ELSE
         '0';
 
@@ -113,7 +82,7 @@ BEGIN
     branch <= '1' WHEN opcode_sig = "1110" ELSE
         '0';
 
-    address <= "0000000000000000" WHEN opcode_sig = "1110" ELSE
+    address <= to_unsigned(to_integer(data_output(5 DOWNTO 0)),16) WHEN opcode_sig = "1110" ELSE
         pc_output;
 
     data_out <= data_output;

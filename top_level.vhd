@@ -55,6 +55,7 @@ ARCHITECTURE a_top_level OF top_level IS
 
     SIGNAL ula_result : unsigned (15 DOWNTO 0);
     SIGNAL reg_data_a_temp, reg_data_b_temp : unsigned (15 DOWNTO 0);
+    SIGNAL selec_reg_a_temp, selec_reg_b_temp, selec_reg_write_temp: unsigned (2 DOWNTO 0);
     SIGNAL data_output : unsigned (15 DOWNTO 0);
     SIGNAL pc_output : unsigned (15 DOWNTO 0);
     SIGNAL address : unsigned (15 DOWNTO 0);

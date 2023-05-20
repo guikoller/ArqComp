@@ -13,11 +13,11 @@ ENTITY control_unit IS
 END ENTITY control_unit;
 
 ARCHITECTURE a_control_unit OF control_unit IS
-    COMPONENT pc_plus_one IS
+    COMPONENT program_counter IS
         PORT (
             clk, write_enable, rst, branch : IN STD_LOGIC;
-            data_out : OUT unsigned(15 DOWNTO 0);
-            address : IN unsigned(15 DOWNTO 0)
+            data_in, address : IN unsigned(15 DOWNTO 0);
+            data_out : OUT unsigned(15 DOWNTO 0)
         );
     END COMPONENT;
 
@@ -39,6 +39,8 @@ ARCHITECTURE a_control_unit OF control_unit IS
     SIGNAL data_output : unsigned (15 DOWNTO 0);
     SIGNAL pc_output : unsigned (15 DOWNTO 0);
     SIGNAL address : unsigned (15 DOWNTO 0);
+    SIGNAL jump : unsigned (15 DOWNTO 0);
+    SIGNAL data_in : unsigned (15 DOWNTO 0) := (OTHERS => '0');
     SIGNAL opcode_sig : unsigned (3 DOWNTO 0);
     SIGNAL state : unsigned (1 DOWNTO 0);
     SIGNAL branch : STD_LOGIC;
@@ -52,12 +54,13 @@ BEGIN
         state => state
     );
 
-    pc : pc_plus_one
+    pc : program_counter
     PORT MAP(
         clk => clk,
         write_enable => write_en_pc,
         rst => rst,
         branch => branch,
+        data_in => pc_output,
         data_out => pc_output,
         address => address
     );
@@ -71,18 +74,16 @@ BEGIN
 
     write_en_pc <= '1' WHEN state = "00" ELSE
         '0';
-
     write_en_reg <= '1' WHEN state = "10" ELSE
         '0';
 
     opcode_sig <= data_output(15 DOWNTO 12);
-
     opcode <= opcode_sig;
 
     branch <= '1' WHEN opcode_sig = "1110" ELSE
         '0';
-
-    address <= to_unsigned(to_integer(data_output(5 DOWNTO 0)),16) WHEN opcode_sig = "1110" ELSE
+    jump <= to_unsigned(to_integer(data_output(5 DOWNTO 0)), 16);
+    address <= jump WHEN opcode_sig = "1110" ELSE
         pc_output;
 
     data_out <= data_output;

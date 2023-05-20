@@ -5,18 +5,18 @@ file . "pc_plus_one_tb.vhd" "f2b60687e32bd3e25bb9cbe2f9135710bbd93cdd" "20230520
 file . "top_level_tb.vhd" "03e60c6c485027d84cf6e9734fee4a163fe49478" "20230520201208.374":
   entity top_level_tb at 1( 0) + 0 on 39;
   architecture a_top_level_tb of top_level_tb at 8( 119) + 0 on 40;
-file . "control_unit.vhd" "d80cf24eb614838f8a1ffedfabd7325dead405e1" "20230520201208.152":
-  entity control_unit at 1( 0) + 0 on 35;
-  architecture a_control_unit of control_unit at 15( 359) + 0 on 36;
+file . "control_unit.vhd" "5a5db8f8c2872c67e7fbd97e2836534be9fa54e0" "20230520205909.806":
+  entity control_unit at 1( 0) + 0 on 113;
+  architecture a_control_unit of control_unit at 15( 359) + 0 on 114;
 file . "state_machine.vhd" "5c72883ba924104b4e114a4b7e5060bcaee1ff61" "20230520201207.977":
   entity state_machine at 1( 0) + 0 on 31;
   architecture a_state_machine of state_machine at 12( 206) + 0 on 32;
 file . "program_counter.vhd" "51c83fbbb5c894d18ad6e3bb22980e7029822779" "20230520204411.041":
   entity program_counter at 1( 0) + 0 on 89;
   architecture a_program_counter of program_counter at 13( 296) + 0 on 90;
-file . "rom.vhd" "1238820ea0b0a706df7c4d4aeff5bc87f5260d33" "20230520201207.587":
-  entity rom at 1( 0) + 0 on 23;
-  architecture a_rom of rom at 13( 321) + 0 on 24;
+file . "rom.vhd" "a3e41a130dbe4cab86aee4a55abd3b3c97bf43d3" "20230520205628.390":
+  entity rom at 1( 0) + 0 on 107;
+  architecture a_rom of rom at 13( 321) + 0 on 108;
 file . "register_bank_tb.vhd" "6623e4f4aed44a91d873c4be7f1f08d0f7310a4a" "20230520201207.402":
   entity register_bank_tb at 1( 0) + 0 on 19;
   architecture a_register_bank_tb of register_bank_tb at 8( 127) + 0 on 20;
@@ -41,9 +41,9 @@ file . "pc_plus_one.vhd" "5817bd6066c1f43b89246ac935cb39b234cd7965" "20230520203
 file . "state_machine_tb.vhd" "f4a1f8fa5eaaffac5f69feaad69f68a08210d941" "20230520201208.065":
   entity state_machine_tb at 1( 0) + 0 on 33;
   architecture a_state_machine_tb of state_machine_tb at 8( 120) + 0 on 34;
-file . "control_unit_tb.vhd" "b0fef86af4e4c1d3c44c8c858daffd0564237983" "20230520201208.243":
-  entity control_unit_tb at 1( 0) + 0 on 37;
-  architecture a_control_unit_tb of control_unit_tb at 8( 125) + 0 on 38;
+file . "control_unit_tb.vhd" "b0fef86af4e4c1d3c44c8c858daffd0564237983" "20230520205912.662":
+  entity control_unit_tb at 1( 0) + 0 on 115;
+  architecture a_control_unit_tb of control_unit_tb at 8( 125) + 0 on 116;
 file . "program_counter_tb.vhd" "5df46fa4c82e771915547c0f5781c0a65aceeff3" "20230520204414.107":
   entity program_counter_tb at 1( 0) + 0 on 91;
   architecture a_program_counter_tb of program_counter_tb at 8( 124) + 0 on 92;

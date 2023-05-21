@@ -47,7 +47,7 @@ ARCHITECTURE a_top_level OF top_level IS
     SIGNAL opcode_sig : unsigned(3 DOWNTO 0);
     SIGNAL state : unsigned(1 DOWNTO 0);
     SIGNAL selec_reg_a, selec_reg_b : unsigned(2 DOWNTO 0);
-    SIGNAL reg_data_a_sig, reg_data_b_sig : unsigned(15 DOWNTO 0);
+    SIGNAL reg_data_a_sig, reg_data_b_sig, ula_a_in, ula_b_in : unsigned(15 DOWNTO 0);
     SIGNAL data_output : unsigned(15 DOWNTO 0);
     SIGNAL op_sig : unsigned(1 DOWNTO 0);
     SIGNAL immediate : unsigned(7 DOWNTO 0);
@@ -57,8 +57,8 @@ ARCHITECTURE a_top_level OF top_level IS
 BEGIN
     ula_inst : ULA
     PORT MAP(
-        data_in_A => reg_data_a_sig,
-        data_in_B => reg_data_b_sig,
+        data_in_A => ula_a_in,
+        data_in_B => ula_b_in,
         op => op_sig,
         result_out => result,
         zero_out => zero,
@@ -104,12 +104,15 @@ BEGIN
     selec_reg_a <= to_unsigned(to_integer(data_output(11 DOWNTO 9)), 3);
     selec_reg_b <= to_unsigned(to_integer(data_output(8 DOWNTO 6)), 3);
 
-    selec_reg_write <=  to_unsigned(to_integer(data_output(11 DOWNTO 9)), 3) 
-                        WHEN immediate_flag = '1' else 
+    ula_a_in <=     reg_data_a_sig;
+    ula_b_in <=     to_unsigned(to_integer(immediate), 16) 
+                    when immediate_flag = '1'
+                    else reg_data_b_sig;
+
+    selec_reg_write <=  selec_reg_a WHEN immediate_flag = '1' else 
                         to_unsigned(to_integer(data_output(5 DOWNTO 3)), 3);
 
-    write_data <= result WHEN immediate_flag = '0' ELSE
-        to_unsigned(to_integer(immediate), 16);
+    write_data <= result;
 
     result_out <= result;
     opcode <= opcode_sig;

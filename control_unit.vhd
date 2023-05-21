@@ -75,7 +75,7 @@ BEGIN
 
     opcode_sig <= data_output(15 DOWNTO 12);
 
-    branch <= '1' WHEN (opcode_sig = "1110") AND (state = "10") ELSE
+    branch <= '1' WHEN (opcode_sig = "1110") AND (state = "00") ELSE
         '0';
 
     jump <= to_unsigned(to_integer(data_output(5 DOWNTO 0)), 16);

@@ -19,13 +19,15 @@ BEGIN
 
     PROCESS (clk)
     BEGIN
-        IF rising_edge(clk) THEN
-            IF rst = '1' THEN
-                sig_data <= x"0000";
-            ELSIF branch = '1' THEN
-                sig_data <= address;
-            ELSE
-                sig_data <= sig_plus;
+        IF rst = '1' THEN
+            sig_data <= x"0000";
+        ELSIF write_enable = '1' THEN
+            IF rising_edge(clk) THEN
+                IF branch = '1' THEN
+                    sig_data <= address;
+                ELSE
+                    sig_data <= sig_plus;
+                END IF;
             END IF;
         END IF;
     END PROCESS;

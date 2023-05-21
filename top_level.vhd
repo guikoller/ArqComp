@@ -4,10 +4,7 @@ USE ieee.numeric_std.ALL;
 
 ENTITY top_level IS
     PORT (
-        selec_reg_a, selec_reg_b : IN unsigned (2 DOWNTO 0);
-        selec_reg_write : IN unsigned (2 DOWNTO 0);
-        write_data : IN unsigned (15 DOWNTO 0);
-        write_enable, clk, rst : IN STD_LOGIC;
+        clk, rst : IN STD_LOGIC;
         opcode : OUT unsigned(3 DOWNTO 0);
         state_out : OUT unsigned (1 DOWNTO 0);
         result_out : OUT unsigned(15 DOWNTO 0);
@@ -39,8 +36,7 @@ ARCHITECTURE a_top_level OF top_level IS
     COMPONENT control_unit IS
         PORT (
             opcode : OUT unsigned(3 DOWNTO 0);
-            op : OUT unsigned (1 DOWNTO 0);
-            clk, write_enable, rst : IN STD_LOGIC;
+            clk, rst : IN STD_LOGIC;
             state_out : OUT unsigned (1 DOWNTO 0);
             data_out : OUT unsigned(15 DOWNTO 0)
         );
@@ -50,11 +46,14 @@ ARCHITECTURE a_top_level OF top_level IS
     SIGNAL zero, negative, carry, overflow, immediate_flag : STD_LOGIC;
     SIGNAL opcode_sig : unsigned(3 DOWNTO 0);
     SIGNAL state : unsigned(1 DOWNTO 0);
+    SIGNAL selec_reg_a, selec_reg_b : unsigned(2 DOWNTO 0);
     SIGNAL reg_data_a_sig, reg_data_b_sig : unsigned(15 DOWNTO 0);
     SIGNAL data_output : unsigned(15 DOWNTO 0);
     SIGNAL op_sig : unsigned(1 DOWNTO 0);
     SIGNAL immediate : unsigned(7 DOWNTO 0);
-
+    SIGNAL write_data : unsigned(15 DOWNTO 0);
+    SIGNAL write_en_reg : STD_LOGIC;
+    SIGNAL selec_reg_write : unsigned (2 DOWNTO 0);
 BEGIN
     ula_inst : ULA
     PORT MAP(
@@ -74,37 +73,43 @@ BEGIN
         selec_reg_b => selec_reg_b,
         selec_reg_write => selec_reg_write,
         write_data => write_data,
-        write_enable => write_enable,
+        write_enable => write_en_reg,
         clk => clk,
         rst => rst,
         reg_data_a => reg_data_a_sig,
         reg_data_b => reg_data_b_sig
     );
-
+    -- VO TOMA UM GUARANA
     control_unit_inst : control_unit
     PORT MAP(
         opcode => opcode_sig,
-        op => op_sig,
         clk => clk,
-        write_enable => write_enable,
         rst => rst,
         state_out => state,
         data_out => data_output
     );
 
-    op_sig <=   "00" WHEN opcode_sig = "0001" ELSE
-            "01" WHEN opcode_sig = "0010" ELSE
-            "10" WHEN opcode_sig = "0011" ELSE
-            "11" WHEN opcode_sig = "0100" ELSE
-            "00";
+    write_en_reg <= '1' WHEN state = "10" ELSE
+        '0';
+
+    op_sig <= "00" WHEN opcode_sig = "0001" ELSE
+        "01" WHEN opcode_sig = "0010" ELSE
+        "10" WHEN opcode_sig = "0011" ELSE
+        "11" WHEN opcode_sig = "0100" ELSE
+        "00";
 
     immediate_flag <= data_output(0);
     immediate <= data_output(8 DOWNTO 1);
 
-    reg_data_a_sig <=   to_unsigned(to_integer(data_output(11 DOWNTO 9)), 16);
-    reg_data_b_sig <=   to_unsigned(to_integer(data_output(8 DOWNTO 5)), 16)  
-                        when immediate_flag = '0' 
-                        else to_unsigned(to_integer(immediate), 16);
+    selec_reg_a <= to_unsigned(to_integer(data_output(11 DOWNTO 9)), 3);
+    selec_reg_b <= to_unsigned(to_integer(data_output(8 DOWNTO 6)), 3);
+
+    selec_reg_write <=  to_unsigned(to_integer(data_output(11 DOWNTO 9)), 3) 
+                        WHEN immediate_flag = '1' else 
+                        to_unsigned(to_integer(data_output(5 DOWNTO 3)), 3);
+
+    write_data <= reg_data_b_sig WHEN immediate_flag = '0' ELSE
+        to_unsigned(to_integer(immediate), 16);
 
     result_out <= result;
     opcode <= opcode_sig;

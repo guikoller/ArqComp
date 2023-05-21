@@ -108,7 +108,7 @@ BEGIN
                         WHEN immediate_flag = '1' else 
                         to_unsigned(to_integer(data_output(5 DOWNTO 3)), 3);
 
-    write_data <= reg_data_b_sig WHEN immediate_flag = '0' ELSE
+    write_data <= result WHEN immediate_flag = '0' ELSE
         to_unsigned(to_integer(immediate), 16);
 
     result_out <= result;

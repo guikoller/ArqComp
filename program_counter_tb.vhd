@@ -2,31 +2,38 @@ LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 
-ENTITY pc_plus_one_tb IS
-END pc_plus_one_tb;
+ENTITY program_counter_tb IS
+END program_counter_tb;
 
-ARCHITECTURE a_pc_plus_one_tb OF pc_plus_one_tb IS
+ARCHITECTURE a_program_counter_tb OF program_counter_tb IS
 
-    COMPONENT pc_plus_one IS
+    COMPONENT program_counter IS
         PORT (
-            clk, write_enable, rst : IN STD_LOGIC;
-            data_out : OUT unsigned(15 DOWNTO 0)
+            clk, write_enable, rst, branch : IN STD_LOGIC;
+            data_out : OUT unsigned(15 DOWNTO 0);
+            data_in, address : IN unsigned(15 DOWNTO 0)
         );
     END COMPONENT;
 
     SIGNAL clk : STD_LOGIC := '0';
     SIGNAL rst : STD_LOGIC := '0';
+    SIGNAL branch : STD_LOGIC := '0';
     SIGNAL write_enable : STD_LOGIC := '1';
     SIGNAL data_out : unsigned(15 DOWNTO 0);
+    SIGNAL address : unsigned(15 DOWNTO 0);
+    SIGNAL data_in : unsigned(15 DOWNTO 0) := (others => '0');
 
 BEGIN
 
-    uut : pc_plus_one
+    uut : program_counter
     PORT MAP(
         clk => clk,
         write_enable => write_enable,
         rst => rst,
-        data_out => data_out
+        branch => branch,
+        data_out => data_out,
+        address => address,
+        data_in => data_in
     );
 
     clk_process : PROCESS
@@ -53,4 +60,4 @@ BEGIN
     BEGIN
         WAIT;
     END PROCESS;
-END a_pc_plus_one_tb;
+END a_program_counter_tb;

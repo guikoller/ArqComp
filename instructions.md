@@ -1,6 +1,6 @@
 # ATARI MOS 6502
 
-http://www.6502.org/tutorials/6502opcodes.html
+http://www.6502.org/tutorials/6502opcodes.html#NOP
 
 |  ||                |       |
 |-----------|-----------|-------------------|------------------|
@@ -15,7 +15,7 @@ http://www.6502.org/tutorials/6502opcodes.html
 
 ## ROM:
 
-```
+```asm
 0:
     NOP;
     ADC $R3, 5;

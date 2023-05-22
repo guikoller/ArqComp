@@ -1,0 +1,962 @@
+$date
+	Sun May 21 01:18:46 2023
+$end
+$version
+	GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+$end
+$timescale
+	1fs
+$end
+$scope module top $end
+$scope module top_level_tb $end
+$var  1 # clk $end
+$var  1 " rst $end
+$var  1 F opcode_sig[3] $end
+$var  1 G opcode_sig[2] $end
+$var  1 H opcode_sig[1] $end
+$var  1 I opcode_sig[0] $end
+$var  1 $ state_out_sig[1] $end
+$var  1 % state_out_sig[0] $end
+$var  1 j result_out_sig[15] $end
+$var  1 k result_out_sig[14] $end
+$var  1 l result_out_sig[13] $end
+$var  1 m result_out_sig[12] $end
+$var  1 n result_out_sig[11] $end
+$var  1 o result_out_sig[10] $end
+$var  1 p result_out_sig[9] $end
+$var  1 q result_out_sig[8] $end
+$var  1 r result_out_sig[7] $end
+$var  1 s result_out_sig[6] $end
+$var  1 t result_out_sig[5] $end
+$var  1 u result_out_sig[4] $end
+$var  1 v result_out_sig[3] $end
+$var  1 w result_out_sig[2] $end
+$var  1 x result_out_sig[1] $end
+$var  1 y result_out_sig[0] $end
+$var  1 Z reg_data_a_sig[15] $end
+$var  1 [ reg_data_a_sig[14] $end
+$var  1 \ reg_data_a_sig[13] $end
+$var  1 ] reg_data_a_sig[12] $end
+$var  1 ^ reg_data_a_sig[11] $end
+$var  1 _ reg_data_a_sig[10] $end
+$var  1 ` reg_data_a_sig[9] $end
+$var  1 a reg_data_a_sig[8] $end
+$var  1 b reg_data_a_sig[7] $end
+$var  1 c reg_data_a_sig[6] $end
+$var  1 d reg_data_a_sig[5] $end
+$var  1 e reg_data_a_sig[4] $end
+$var  1 f reg_data_a_sig[3] $end
+$var  1 g reg_data_a_sig[2] $end
+$var  1 h reg_data_a_sig[1] $end
+$var  1 i reg_data_a_sig[0] $end
+$var  1 J reg_data_b_sig[15] $end
+$var  1 K reg_data_b_sig[14] $end
+$var  1 L reg_data_b_sig[13] $end
+$var  1 M reg_data_b_sig[12] $end
+$var  1 N reg_data_b_sig[11] $end
+$var  1 O reg_data_b_sig[10] $end
+$var  1 P reg_data_b_sig[9] $end
+$var  1 Q reg_data_b_sig[8] $end
+$var  1 R reg_data_b_sig[7] $end
+$var  1 S reg_data_b_sig[6] $end
+$var  1 T reg_data_b_sig[5] $end
+$var  1 U reg_data_b_sig[4] $end
+$var  1 V reg_data_b_sig[3] $end
+$var  1 W reg_data_b_sig[2] $end
+$var  1 X reg_data_b_sig[1] $end
+$var  1 Y reg_data_b_sig[0] $end
+$scope module uut $end
+$scope module control_unit_inst $end
+$var  1 6 data_output[15] $end
+$var  1 7 data_output[14] $end
+$var  1 8 data_output[13] $end
+$var  1 9 data_output[12] $end
+$var  1 : data_output[11] $end
+$var  1 ; data_output[10] $end
+$var  1 < data_output[9] $end
+$var  1 = data_output[8] $end
+$var  1 > data_output[7] $end
+$var  1 ? data_output[6] $end
+$var  1 @ data_output[5] $end
+$var  1 A data_output[4] $end
+$var  1 B data_output[3] $end
+$var  1 C data_output[2] $end
+$var  1 D data_output[1] $end
+$var  1 E data_output[0] $end
+$var  1 & address[15] $end
+$var  1 ' address[14] $end
+$var  1 ( address[13] $end
+$var  1 ) address[12] $end
+$var  1 * address[11] $end
+$var  1 + address[10] $end
+$var  1 , address[9] $end
+$var  1 - address[8] $end
+$var  1 . address[7] $end
+$var  1 / address[6] $end
+$var  1 0 address[5] $end
+$var  1 1 address[4] $end
+$var  1 2 address[3] $end
+$var  1 3 address[2] $end
+$var  1 4 address[1] $end
+$var  1 5 address[0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0_
+0w
+0g
+0b
+0#
+0h
+u<
+0O
+uG
+uB
+u=
+u>
+0%
+1"
+0a
+u?
+0q
+uA
+0f
+0d
+0r
+0c
+u@
+uD
+0*
+uE
+0&
+0j
+uC
+0e
+0'
+0s
+0)
+05
+0J
+0+
+0x
+0(
+0t
+uH
+02
+0-
+0.
+0k
+0,
+0i
+0/
+0u
+01
+04
+0N
+00
+0K
+0v
+0L
+0l
+03
+0p
+0U
+uF
+0\
+0M
+u;
+0P
+0R
+uI
+0S
+0y
+0Q
+0m
+0Z
+0V
+0T
+u9
+0X
+0`
+0n
+0[
+0W
+u6
+0$
+u7
+0]
+0Y
+0o
+0^
+u:
+u8
+$end
+#10000000
+08
+0<
+1#
+0B
+0G
+0=
+0>
+0A
+0?
+0C
+0@
+0D
+0E
+0H
+0:
+0;
+0F
+0I
+09
+06
+07
+#20000000
+0#
+#30000000
+1#
+#40000000
+0#
+0"
+#50000000
+1#
+1%
+15
+#60000000
+0#
+#70000000
+1#
+1E
+1B
+1<
+0%
+1D
+1;
+19
+1I
+1$
+#80000000
+0#
+#90000000
+1#
+0$
+1g
+1w
+1i
+1y
+#100000000
+0#
+#110000000
+1#
+1%
+05
+14
+#120000000
+0#
+#130000000
+1#
+0y
+1$
+0w
+1A
+0%
+0<
+0B
+0g
+0i
+1:
+0;
+0D
+#140000000
+0#
+#150000000
+1#
+0$
+1f
+1v
+#160000000
+0#
+#170000000
+1#
+15
+1%
+#180000000
+0#
+#190000000
+1#
+0%
+0v
+0f
+1B
+0E
+1@
+1>
+1=
+1?
+1$
+0I
+16
+0:
+09
+1F
+#200000000
+0#
+#210000000
+1#
+0$
+#220000000
+0#
+#230000000
+1#
+1%
+04
+05
+13
+#240000000
+0#
+#250000000
+1#
+0F
+0?
+18
+0@
+1C
+0%
+0A
+1<
+1$
+1H
+1:
+06
+#260000000
+0#
+#270000000
+1#
+0$
+#280000000
+0#
+#290000000
+1#
+1%
+15
+#300000000
+0#
+#310000000
+1#
+0>
+1f
+17
+14
+1G
+1F
+1E
+1D
+0B
+16
+1u
+0%
+1$
+0<
+1V
+#320000000
+0#
+#330000000
+1#
+0V
+06
+1A
+08
+1>
+0F
+1?
+0f
+04
+1B
+0D
+0C
+0=
+1<
+0u
+0$
+0H
+1W
+1Y
+#340000000
+0#
+#350000000
+1#
+1C
+0?
+16
+1b
+1h
+05
+1F
+0A
+1q
+0>
+18
+1D
+1x
+1w
+0B
+14
+0W
+1=
+1%
+1R
+1H
+1X
+0<
+1i
+#360000000
+0#
+#370000000
+1#
+0i
+1B
+0q
+0C
+1?
+03
+0h
+0b
+1y
+15
+1>
+12
+0x
+0D
+1<
+0=
+04
+1W
+0X
+0%
+0:
+0R
+1$
+#380000000
+0#
+#390000000
+1#
+0$
+0E
+0Y
+0B
+13
+02
+0y
+0w
+05
+1=
+1:
+0W
+14
+#400000000
+0#
+#410000000
+1#
+1Y
+1v
+1E
+1c
+1d
+1y
+1s
+1B
+1t
+1W
+1g
+0:
+0=
+1%
+#420000000
+0#
+#430000000
+1#
+0%
+04
+1$
+03
+12
+15
+#440000000
+0#
+#450000000
+1#
+05
+13
+0B
+0E
+0v
+0Y
+0$
+0s
+0y
+0d
+0c
+14
+02
+0t
+1=
+1:
+0W
+0g
+#460000000
+0#
+#470000000
+1#
+1g
+1c
+1E
+1%
+1B
+1d
+1s
+1v
+1Y
+1y
+1W
+0:
+1t
+0=
+#480000000
+0#
+#490000000
+1#
+03
+15
+0%
+1$
+04
+12
+#500000000
+0#
+#510000000
+1#
+02
+0E
+0g
+1=
+0Y
+0c
+05
+13
+0d
+0v
+0B
+0s
+14
+0t
+0$
+1:
+0y
+0W
+#520000000
+0#
+#530000000
+1#
+1W
+1B
+0=
+1%
+1g
+1E
+1v
+1Y
+1c
+1d
+1y
+1s
+0:
+1t
+#540000000
+0#
+#550000000
+1#
+0%
+12
+03
+15
+04
+1$
+#560000000
+0#
+#570000000
+1#
+0$
+13
+0c
+0W
+0t
+1=
+0B
+02
+0E
+0Y
+0g
+0v
+14
+0d
+05
+0s
+0y
+1:
+#580000000
+0#
+#590000000
+1#
+0:
+1g
+1t
+1W
+1c
+1Y
+1%
+1B
+0=
+1E
+1y
+1v
+1s
+1d
+#600000000
+0#
+#610000000
+1#
+1$
+03
+12
+0%
+04
+15
+#620000000
+0#
+#630000000
+1#
+05
+02
+1=
+0t
+0d
+0g
+1:
+13
+0B
+0Y
+0c
+0W
+0$
+14
+0E
+0v
+0y
+0s
+#640000000
+0#
+#650000000
+1#
+1s
+1W
+1d
+1t
+0=
+1c
+1B
+1g
+0:
+1Y
+1y
+1v
+1%
+1E
+#660000000
+0#
+#670000000
+1#
+15
+12
+03
+0%
+1$
+04
+#680000000
+0#
+#690000000
+1#
+14
+02
+1:
+0d
+0E
+0W
+0s
+05
+0g
+0t
+0c
+1=
+0B
+0$
+13
+0v
+0Y
+0y
+#700000000
+0#
+#710000000
+1#
+1y
+0=
+1E
+1d
+0:
+1c
+1g
+1W
+1s
+1t
+1Y
+1B
+1v
+1%
+#720000000
+0#
+#730000000
+1#
+0%
+04
+12
+15
+1$
+03
+#740000000
+0#
+#750000000
+1#
+13
+02
+0s
+0E
+1=
+0y
+14
+0W
+0d
+0c
+1:
+0g
+0$
+0t
+05
+0B
+0Y
+0v
+#760000000
+0#
+#770000000
+1#
+1v
+0:
+1E
+1s
+1%
+1c
+1W
+0=
+1y
+1d
+1Y
+1g
+1B
+1t
+#780000000
+0#
+#790000000
+1#
+03
+12
+0%
+04
+1$
+15
+#800000000
+0#
+#810000000
+1#
+05
+0y
+0E
+0t
+1:
+0v
+02
+13
+0s
+1=
+0c
+0W
+0$
+0d
+14
+0g
+0Y
+0B
+#820000000
+0#
+#830000000
+1#
+1B
+1c
+1t
+1%
+1E
+1y
+0=
+0:
+1v
+1s
+1Y
+1W
+1g
+1d
+#840000000
+0#
+#850000000
+1#
+0%
+15
+03
+12
+1$
+04
+#860000000
+0#
+#870000000
+1#
+14
+13
+0v
+0B
+0d
+0t
+0c
+05
+0y
+1:
+0E
+1=
+0$
+0s
+02
+0W
+0Y
+0g
+#880000000
+0#
+#890000000
+1#
+1g
+1E
+1d
+1B
+1v
+0:
+1%
+1c
+1t
+1y
+1Y
+0=
+1W
+1s
+#900000000
+0#
+#910000000
+1#
+04
+03
+15
+0%
+1$
+12
+#920000000
+0#
+#930000000
+1#
+02
+05
+0t
+0d
+0s
+0E
+0g
+13
+0c
+1:
+0v
+0B
+14
+0$
+0y
+1=
+0Y
+0W
+#940000000
+0#
+#950000000
+1#
+1W
+1B
+1s
+1d
+1t
+1v
+1c
+1E
+1g
+0:
+1Y
+0=
+1%
+1y
+#960000000
+0#
+#970000000
+1#
+12
+15
+03
+0%
+04
+1$
+#980000000
+0#
+#990000000
+1#
+0$
+05
+0g
+0s
+0y
+0B
+0W
+02
+0E
+0d
+0v
+0t
+0c
+14
+13
+1=
+1:
+0Y
+#1000000000

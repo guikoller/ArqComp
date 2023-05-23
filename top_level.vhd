@@ -112,7 +112,7 @@ BEGIN
     selec_reg_write <=  selec_reg_a WHEN immediate_flag = '1' else 
                         to_unsigned(to_integer(data_output(5 DOWNTO 3)), 3);
 
-    write_data <= result;
+    write_data <= to_unsigned(to_integer(immediate), 16) when opcode_sig = "1000" else result;
 
     result_out <= result;
     opcode <= opcode_sig;

@@ -6,8 +6,8 @@ jmp $d'20' | 1110 0000 000 10100
 
 nop
 
-adc (imediato) flag 1
-0001 000  0000 0000 1
+store (imediato) flag 1
+1000 000  0000 0000 1
 op   rega imm
 
 adc mem (registradores) flag0

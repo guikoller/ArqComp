@@ -1,4 +1,5 @@
-R5 r3 com 5
+LAB5:
+carrega r3 com 5
 1000 011 00000101 1
 1000011000001011
 
@@ -27,3 +28,24 @@ copia r5 para r3
 salta para terceira instrução
 1110 000000 000011
 1110000000000011
+
+LAB6:
+Carrega R3 (o registrador 3) com o valor 0
+1000 011 00000000 1
+
+Carrega R4 com 0
+1000 100 00000000 1
+
+Soma R3 com R4 e guarda em R4
+0001 011 100 100 00 0
+
+Soma 1 em R3
+0001 011 00000001 1
+
+Se R3<30 s
+11110
+alta para a instrução do passo 3 *
+1111 011 11110 000
+
+Copia valor de R4 para R5
+0001 100 000 101 00 0

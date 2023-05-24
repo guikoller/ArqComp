@@ -13,7 +13,7 @@ ENTITY flags_register IS
 END ENTITY;
 
 ARCHITECTURE a_flags_register OF flags_register IS
-    SIGNAL V, N, Z, C : STD_LOGIC;
+    SIGNAL V, N, Z, C : STD_LOGIC := ('0');
 BEGIN
 
     PROCESS (clk, rst)

@@ -14,6 +14,7 @@ END ULA;
 
 ARCHITECTURE A_ULA OF ULA IS
     SIGNAL temp : unsigned(15 DOWNTO 0);
+    SIGNAL carry_sum : unsigned (16 downto 0);
     SIGNAL negative, carry, overflow : STD_LOGIC;
 BEGIN
     PROCESS (data_in_A, data_in_B, op) BEGIN
@@ -21,12 +22,8 @@ BEGIN
             WHEN "00" =>
                 -- Soma
                 temp <= data_in_A + data_in_B;
-
-                IF data_in_A(0) = '1' AND data_in_B(0) = '1' THEN
-                    carry <= '1';
-                ELSE
-                    carry <= '0';
-                END IF;
+                carry_sum <= to_unsigned(to_integer(data_in_A), 17) + to_unsigned(to_integer(data_in_B), 17);
+                carry <= carry_sum(16);
 
                 IF (data_in_A + data_in_B) > "1111111111111111" THEN
                     overflow <= '1';
@@ -38,7 +35,7 @@ BEGIN
                 -- Subtração
                 temp <= data_in_A - data_in_B;
 
-                IF data_in_A < data_in_B THEN
+                IF data_in_A <= data_in_B THEN
                     negative <= '1';
                 ELSE
                     negative <= '0';

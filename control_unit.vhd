@@ -36,9 +36,11 @@ ARCHITECTURE a_control_unit OF control_unit IS
     END COMPONENT;
 
     SIGNAL data_output : unsigned (15 DOWNTO 0);
+    SIGNAL pc_input : unsigned (15 DOWNTO 0);
     SIGNAL pc_output : unsigned (15 DOWNTO 0);
     SIGNAL address : unsigned (15 DOWNTO 0);
     SIGNAL jump : unsigned (15 DOWNTO 0);
+    SIGNAL two_comp_jump, two_comp_pc_output : unsigned (15 DOWNTO 0);
     SIGNAL data_in : unsigned (15 DOWNTO 0) := (OTHERS => '0');
     SIGNAL opcode_sig : unsigned (3 DOWNTO 0);
     SIGNAL state : unsigned (1 DOWNTO 0);
@@ -75,11 +77,20 @@ BEGIN
 
     opcode_sig <= data_output(15 DOWNTO 12);
 
-    branch <= '1' WHEN (opcode_sig = "1110") AND (state = "00") ELSE
+    branch <= '1' WHEN ((opcode_sig = "1110") AND (state = "00")) ELSE
+        '1' WHEN ((opcode_sig = "1111") AND (state = "00")) ELSE
         '0';
 
     jump <= to_unsigned(to_integer(data_output(5 DOWNTO 0)), 16);
-    address <= jump WHEN branch = '1' ELSE
+
+    two_comp_jump <= '0' & NOT(jump) + 1; -- Two's complement of jump
+
+    two_comp_pc_output <= '0' & pc_output; -- extending program counter
+
+    pc_input <= two_comp_pc_output + two_comp_jump; -- result of relative jump
+
+    address <= jump WHEN branch = '1' AND opcode_sig = "1110" ELSE
+        pc_input (15 DOWNTO 0) WHEN branch = '1' AND opcode_sig = "1111" ELSE
         pc_output;
 
     opcode <= opcode_sig;

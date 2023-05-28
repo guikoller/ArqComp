@@ -70,14 +70,14 @@ ARCHITECTURE a_top_level OF top_level IS
     SIGNAL en_Z : STD_LOGIC;
     SIGNAL en_C : STD_LOGIC;
 
-
     CONSTANT NOP : unsigned(3 DOWNTO 0) := "0000";
     CONSTANT ADD : unsigned(3 DOWNTO 0) := "0001";
     CONSTANT SUB : unsigned(3 DOWNTO 0) := "0010";
-    CONSTANT MAIOR : unsigned(3 DOWNTO 0) := "0011";
-    CONSTANT JMP : unsigned(3 DOWNTO 0) := "1110";
-    CONSTANT CLS : unsigned(3 DOWNTO 0) := "1010";
 
+    CONSTANT CLS : unsigned(3 DOWNTO 0) := "1010";
+    CONSTANT CMP : unsigned(3 DOWNTO 0) := "0100";
+
+    CONSTANT JMP : unsigned(3 DOWNTO 0) := "1110";
 BEGIN
     ula_inst : ULA
     PORT MAP(
@@ -134,14 +134,17 @@ BEGIN
     write_en_reg <= '1' WHEN state = "10" ELSE
         '0';
 
-    op_sig <= "00" WHEN opcode_sig = "0001" ELSE
-        "01" WHEN opcode_sig = "0010" ELSE
+    op_sig <= "00" WHEN opcode_sig = ADD ELSE
+        "01" WHEN opcode_sig = SUB ELSE
         "10" WHEN opcode_sig = "0011" ELSE
-        "11" WHEN opcode_sig = "0100" ELSE
+        "11" WHEN opcode_sig = CMP ELSE
         "00";
 
-    en_C <= '1' when opcode_sig = CLS else '0';
-    carry_in <= data_output(0) when opcode_sig = CLS else carry;
+    en_C <= '1' WHEN opcode_sig = CLS OR opcode_sig = CMP ELSE
+        '0';
+
+    carry_in <= data_output(0) WHEN opcode_sig = CLS OR opcode_sig = CMP ELSE
+        carry;
 
     immediate_flag <= data_output(0);
     immediate <= data_output(8 DOWNTO 1);

@@ -40,11 +40,14 @@ ARCHITECTURE a_control_unit OF control_unit IS
     SIGNAL pc_output : unsigned (15 DOWNTO 0);
     SIGNAL address : unsigned (15 DOWNTO 0);
     SIGNAL jump : unsigned (15 DOWNTO 0);
-    SIGNAL two_comp_jump, two_comp_pc_output : unsigned (15 DOWNTO 0);
+    SIGNAL signed_jump : signed (16 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL signed_pc_output : signed (16 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL signed_result : signed (16 DOWNTO 0) := (OTHERS => '0');
     SIGNAL data_in : unsigned (15 DOWNTO 0) := (OTHERS => '0');
     SIGNAL opcode_sig : unsigned (3 DOWNTO 0);
     SIGNAL state : unsigned (1 DOWNTO 0);
     SIGNAL branch : STD_LOGIC;
+    SIGNAL is_negative : STD_LOGIC;
     SIGNAL write_en_pc : STD_LOGIC;
 BEGIN
     st_machine : state_machine
@@ -82,15 +85,16 @@ BEGIN
         '0';
 
     jump <= to_unsigned(to_integer(data_output(5 DOWNTO 0)), 16);
+    is_negative <= data_output(6);
 
-    two_comp_jump <= '0' & NOT(jump) + 1; -- Two's complement of jump
+    signed_jump <= signed('1' & not(jump) + 1) when is_negative = '1' else signed('0' & jump);
+    signed_pc_output <= signed('0' & pc_output);
+    signed_result <= signed_jump + signed_pc_output;
 
-    two_comp_pc_output <= '0' & pc_output; -- extending program counter
-
-    pc_input <= two_comp_pc_output + two_comp_jump; -- result of relative jump
-
+    pc_input <= unsigned(resize(signed_result(16 downto 0), 16)); -- result of relative jump
+    
     address <= jump WHEN branch = '1' AND opcode_sig = "1110" ELSE
-        pc_input (15 DOWNTO 0) WHEN branch = '1' AND opcode_sig = "1111" ELSE
+        pc_input WHEN branch = '1' AND opcode_sig = "1111" ELSE
         pc_output;
 
     opcode <= opcode_sig;

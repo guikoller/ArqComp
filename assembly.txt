@@ -32,20 +32,29 @@ salta para terceira instrução
 LAB6:
 Carrega R3 (o registrador 3) com o valor 0
 1000 011 00000000 1
+1000011000000001
 
 Carrega R4 com 0
 1000 100 00000000 1
+1000100000000001
 
 Soma R3 com R4 e guarda em R4
 0001 011 100 100 00 0
+0001011100100000
 
 Soma 1 em R3
 0001 011 00000001 1
+0001011000000011
 
 Se R3<30 s
 11110
-alta para a instrução do passo 3 *
-1111 011 11110 000
+salta para a instrução do passo 3 *
+1111 00000 1 000010
+1111000001000010
+
 
 Copia valor de R4 para R5
 0001 100 000 101 00 0
+
+1110 000000 000011
+1110000000000011

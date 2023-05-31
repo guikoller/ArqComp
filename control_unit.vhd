@@ -5,7 +5,7 @@ USE IEEE.numeric_std.ALL;
 ENTITY control_unit IS
     PORT (
         opcode : OUT unsigned(3 DOWNTO 0);
-        clk, rst : IN STD_LOGIC;
+        clk, rst, branch : IN STD_LOGIC;
         state_out : OUT unsigned (1 DOWNTO 0);
         data_out : OUT unsigned(15 DOWNTO 0)
     );
@@ -46,9 +46,9 @@ ARCHITECTURE a_control_unit OF control_unit IS
     SIGNAL data_in : unsigned (15 DOWNTO 0) := (OTHERS => '0');
     SIGNAL opcode_sig : unsigned (3 DOWNTO 0);
     SIGNAL state : unsigned (1 DOWNTO 0);
-    SIGNAL branch : STD_LOGIC;
     SIGNAL is_negative : STD_LOGIC;
     SIGNAL write_en_pc : STD_LOGIC;
+    
 BEGIN
     st_machine : state_machine
     PORT MAP(
@@ -79,10 +79,6 @@ BEGIN
         '0';
 
     opcode_sig <= data_output(15 DOWNTO 12);
-
-    branch <= '1' WHEN ((opcode_sig = "1110") AND (state = "00")) ELSE
-        '1' WHEN ((opcode_sig = "1111") AND (state = "00")) ELSE
-        '0';
 
     jump <= to_unsigned(to_integer(data_output(5 DOWNTO 0)), 16);
     is_negative <= data_output(6);

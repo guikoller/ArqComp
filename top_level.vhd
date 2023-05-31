@@ -46,7 +46,7 @@ ARCHITECTURE a_top_level OF top_level IS
     COMPONENT control_unit IS
         PORT (
             opcode : OUT unsigned(3 DOWNTO 0);
-            clk, rst : IN STD_LOGIC;
+            clk, rst,branch : IN STD_LOGIC;
             state_out : OUT unsigned (1 DOWNTO 0);
             data_out : OUT unsigned(15 DOWNTO 0)
         );
@@ -64,6 +64,7 @@ ARCHITECTURE a_top_level OF top_level IS
     SIGNAL write_data : unsigned(15 DOWNTO 0);
     SIGNAL write_en_reg : STD_LOGIC;
     SIGNAL selec_reg_write : unsigned (2 DOWNTO 0);
+    SIGNAL branch_sig : STD_LOGIC := '0';
 
     SIGNAL en_V : STD_LOGIC;
     SIGNAL en_N : STD_LOGIC;
@@ -78,6 +79,7 @@ ARCHITECTURE a_top_level OF top_level IS
     CONSTANT CMP : unsigned(3 DOWNTO 0) := "0100";
 
     CONSTANT JMP : unsigned(3 DOWNTO 0) := "1110";
+    CONSTANT BMI : unsigned(3 DOWNTO 0) := "1111";
 BEGIN
     ula_inst : ULA
     PORT MAP(
@@ -127,11 +129,16 @@ BEGIN
         opcode => opcode_sig,
         clk => clk,
         rst => rst,
+        branch => branch_sig,
         state_out => state,
         data_out => data_output
     );
 
-    write_en_reg <= '1' WHEN state = "10" ELSE
+    branch_sig <= '1' WHEN (opcode_sig = JMP AND state = "00") ELSE
+    '1' WHEN (opcode_sig = BMI AND state = "00" AND C = '1') ELSE
+    '0';
+
+    write_en_reg <= '1' WHEN (state = "10" and opcode_sig /= CMP)ELSE
         '0';
 
     op_sig <= "00" WHEN opcode_sig = ADD ELSE

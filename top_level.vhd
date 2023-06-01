@@ -46,7 +46,7 @@ ARCHITECTURE a_top_level OF top_level IS
     COMPONENT control_unit IS
         PORT (
             opcode : OUT unsigned(3 DOWNTO 0);
-            clk, rst,branch : IN STD_LOGIC;
+            clk, rst, branch : IN STD_LOGIC;
             state_out : OUT unsigned (1 DOWNTO 0);
             data_out : OUT unsigned(15 DOWNTO 0)
         );
@@ -135,10 +135,10 @@ BEGIN
     );
 
     branch_sig <= '1' WHEN (opcode_sig = JMP AND state = "00") ELSE
-    '1' WHEN (opcode_sig = BMI AND state = "00" AND C = '1') ELSE
-    '0';
+        '1' WHEN (opcode_sig = BMI AND state = "00" AND C = '0') ELSE
+        '0';
 
-    write_en_reg <= '1' WHEN (state = "10" and opcode_sig /= CMP)ELSE
+    write_en_reg <= '1' WHEN (state = "10" AND opcode_sig /= CMP)ELSE
         '0';
 
     op_sig <= "00" WHEN opcode_sig = ADD ELSE
@@ -150,7 +150,8 @@ BEGIN
     en_C <= '1' WHEN opcode_sig = CLS OR opcode_sig = CMP ELSE
         '0';
 
-    carry_in <= data_output(0) WHEN opcode_sig = CLS OR opcode_sig = CMP ELSE
+    carry_in <= data_output(0) WHEN opcode_sig = CLS ELSE
+        result(0) WHEN opcode_sig = CMP ELSE
         carry;
 
     immediate_flag <= data_output(0);

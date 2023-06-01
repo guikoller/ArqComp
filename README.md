@@ -13,7 +13,7 @@ http://www.6502.org/tutorials/6502opcodes.html
 | SUM       |ADC $RA, $RB, $RD|ADC $R5, $R0, $R3 | 0001_101_000_011_00_0 |
 | JUMP       |JMP POS |JMP 3             | 1110_000000_000011 |
 
-## ROM:
+## LAB5:
 
 ```
 0:
@@ -39,3 +39,15 @@ http://www.6502.org/tutorials/6502opcodes.html
 1110000000000011
 ```
 
+## LAB6:
+```
+    NOP;
+    ADC $R3, 0;
+    ADC $R4, 0;
+    ADC $R3, $R4, $R4;
+    ADC $R3, 1;
+    CLS;
+    CMP R3, 30;
+    BMI -4;
+    ADC $R4, $R0, $R5
+```

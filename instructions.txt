@@ -1,15 +1,19 @@
-lda
-ldx
-ldr
+JUMP jmp $d'20' | 1110 0000 000 10100
 
-jmp $d'20' | 1110 0000 000 10100
+BMI R, V
+1111 011 000000000
+op   reg salto
 
 nop
+0000 0000 0000 0000
 
-adc (imediato) flag 1
-0001 000  0000 0000 1
+store (imediato) flag 1
+1000 000  0000 0000 1
 op   rega imm
 
 adc mem (registradores) flag0
 0001 000  000  000  00 0
 op   rega regb regd
+
+CLSC (CLear Carry Set Carry)   
+1010 0000 0000 000 0/1

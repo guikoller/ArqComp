@@ -9,7 +9,7 @@ ARCHITECTURE a_control_unit_tb OF control_unit_tb IS
     COMPONENT control_unit IS
         PORT (
             opcode : OUT unsigned(3 DOWNTO 0);
-            clk, rst : IN STD_LOGIC;
+            clk, rst, branch : IN STD_LOGIC;
             state_out : OUT unsigned (1 DOWNTO 0);
             data_out : OUT unsigned(15 DOWNTO 0)
         );
@@ -17,6 +17,7 @@ ARCHITECTURE a_control_unit_tb OF control_unit_tb IS
 
     SIGNAL clk : STD_LOGIC := '0';
     SIGNAL rst : STD_LOGIC := '0';
+    SIGNAL branch : STD_LOGIC := '0';
     SIGNAL data_out : unsigned(15 DOWNTO 0);
     SIGNAL state_out : unsigned(1 DOWNTO 0);
     SIGNAL opcode : unsigned(3 DOWNTO 0);
@@ -26,6 +27,7 @@ BEGIN
         opcode => opcode,
         clk => clk,
         rst => rst,
+        branch => branch,
         state_out => state_out,
         data_out => data_out
     );

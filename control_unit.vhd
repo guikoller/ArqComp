@@ -5,7 +5,7 @@ USE IEEE.numeric_std.ALL;
 ENTITY control_unit IS
     PORT (
         opcode : OUT unsigned(3 DOWNTO 0);
-        clk, rst : IN STD_LOGIC;
+        clk, rst, branch : IN STD_LOGIC;
         state_out : OUT unsigned (1 DOWNTO 0);
         data_out : OUT unsigned(15 DOWNTO 0)
     );
@@ -36,14 +36,19 @@ ARCHITECTURE a_control_unit OF control_unit IS
     END COMPONENT;
 
     SIGNAL data_output : unsigned (15 DOWNTO 0);
+    SIGNAL pc_input : unsigned (15 DOWNTO 0);
     SIGNAL pc_output : unsigned (15 DOWNTO 0);
     SIGNAL address : unsigned (15 DOWNTO 0);
     SIGNAL jump : unsigned (15 DOWNTO 0);
+    SIGNAL signed_jump : signed (16 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL signed_pc_output : signed (16 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL signed_result : signed (16 DOWNTO 0) := (OTHERS => '0');
     SIGNAL data_in : unsigned (15 DOWNTO 0) := (OTHERS => '0');
     SIGNAL opcode_sig : unsigned (3 DOWNTO 0);
     SIGNAL state : unsigned (1 DOWNTO 0);
-    SIGNAL branch : STD_LOGIC;
+    SIGNAL is_negative : STD_LOGIC;
     SIGNAL write_en_pc : STD_LOGIC;
+    
 BEGIN
     st_machine : state_machine
     PORT MAP(
@@ -75,11 +80,17 @@ BEGIN
 
     opcode_sig <= data_output(15 DOWNTO 12);
 
-    branch <= '1' WHEN (opcode_sig = "1110") AND (state = "00") ELSE
-        '0';
-
     jump <= to_unsigned(to_integer(data_output(5 DOWNTO 0)), 16);
-    address <= jump WHEN branch = '1' ELSE
+    is_negative <= data_output(6);
+
+    signed_jump <= signed('1' & not(jump) + 1) when is_negative = '1' else signed('0' & jump);
+    signed_pc_output <= signed('0' & pc_output);
+    signed_result <= signed_jump + signed_pc_output;
+
+    pc_input <= unsigned(resize(signed_result(16 downto 0), 16)); -- result of relative jump
+    
+    address <= jump WHEN branch = '1' AND opcode_sig = "1110" ELSE
+        pc_input WHEN branch = '1' AND opcode_sig = "1111" ELSE
         pc_output;
 
     opcode <= opcode_sig;

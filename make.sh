@@ -1,6 +1,7 @@
 rm -r work-obj93.cf
 ./ghdl.sh ula
 ./ghdl.sh ula_tb
+./ghdl.sh flags_register
 ./ghdl.sh register_unit
 ./ghdl.sh register_bank
 ./ghdl.sh register_bank_tb

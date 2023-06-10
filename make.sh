@@ -7,6 +7,8 @@ rm -r work-obj93.cf
 ./ghdl.sh register_bank_tb
 ./ghdl.sh rom
 ./ghdl.sh rom_tb
+./ghdl.sh ram
+./ghdl.sh ram_tb
 ./ghdl.sh program_counter
 ./ghdl.sh program_counter_tb
 ./ghdl.sh state_machine

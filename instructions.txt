@@ -17,3 +17,49 @@ op   rega regb regd
 
 CLSC (CLear Carry Set Carry)   
 1010 0000 0000 000 0/1
+
+LDA Load Accumulator with Memory 
+LDA imm
+1000 000 00000000 1
+LDA $X (A <- A+X)
+0001 001 000 000 00 0
+LDA mem
+
+
+LDX Load X with Memory
+LDX imm
+1000 001 00000000 1
+
+LDY Load Y with Memory
+LDY imm
+1000 000 00000000 1
+
+
+store register in memory
+STA
+0011 000 000000000
+STX
+0011 001 000000000
+STY
+0011 010 000000000
+
+
+PHA
+1000 000 00000000 1
+
+0000 - NOP
+0001 - ADC
+0010 - SBC
+0011 - 
+0100 - CMP
+0101
+0110
+0111
+1000 - LDA, LDX, LDY
+1001
+1010 - CLS
+1011
+1100
+1101
+1110 - JMP
+1111 - BMI

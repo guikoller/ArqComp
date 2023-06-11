@@ -67,3 +67,26 @@ Copia valor de R4 para R5
 
 1110 000000 000011
 1110000000000011
+
+LDA #10 --carrega acumulador com 10
+1000 000 00001010 1
+
+STA 0x0001 --guarda valor do acumulador no endereço 1
+0110 000 000000001
+
+LDA #1 -- carrega acumulador com 1
+1000 000 00000001 1
+
+PHA -- carrega o valor do acumulador no ponteiro
+0001 000 111 011 00 0
+
+LDX $SP -- carrega em X a ram
+0001 011 111 001 00 1
+
+
+0000000000000000
+1000000000010101
+0110000000000001
+1000000000000011
+0001000111011000
+0001011111001001

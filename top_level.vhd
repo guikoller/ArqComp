@@ -19,7 +19,7 @@ ARCHITECTURE a_top_level OF top_level IS
             data_in_B : IN unsigned(15 DOWNTO 0);
             op : IN unsigned(1 DOWNTO 0);
             result_out : OUT unsigned(15 DOWNTO 0);
-            zero_out, negative_out, carry_out, overflow_out : OUT STD_LOGIC
+            zero_out, negative_out, carry_out : OUT STD_LOGIC
         );
     END COMPONENT;
 
@@ -63,7 +63,7 @@ ARCHITECTURE a_top_level OF top_level IS
     END COMPONENT;
 
     SIGNAL result : unsigned(15 DOWNTO 0);
-    SIGNAL zero, negative, carry, carry_in, overflow, immediate_flag, V, N, Z, C : STD_LOGIC;
+    SIGNAL zero, negative, carry, carry_in, immediate_flag, V, N, Z, C : STD_LOGIC;
     SIGNAL opcode_sig : unsigned(3 DOWNTO 0);
     SIGNAL state : unsigned(1 DOWNTO 0);
     SIGNAL selec_reg_a, selec_reg_b : unsigned(2 DOWNTO 0);
@@ -108,8 +108,7 @@ BEGIN
         result_out => result,
         zero_out => zero,
         negative_out => negative,
-        carry_out => carry,
-        overflow_out => overflow
+        carry_out => carry
     );
 
     flags_reg : flags_register
@@ -120,7 +119,7 @@ BEGIN
         N_enable => en_N,
         Z_enable => en_Z,
         C_enable => en_C,
-        V_in => overflow,
+        V_in => '0',
         N_in => negative,
         Z_in => zero,
         C_in => carry_in,

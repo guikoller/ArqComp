@@ -84,15 +84,19 @@ ARCHITECTURE a_top_level OF top_level IS
     CONSTANT NOP : unsigned(3 DOWNTO 0) := "0000";
     CONSTANT ADD : unsigned(3 DOWNTO 0) := "0001";
     CONSTANT SUB : unsigned(3 DOWNTO 0) := "0010";
-
     CONSTANT CLS : unsigned(3 DOWNTO 0) := "1010";
     CONSTANT CMP : unsigned(3 DOWNTO 0) := "0100";
-
     CONSTANT JMP : unsigned(3 DOWNTO 0) := "1110";
     CONSTANT BMI : unsigned(3 DOWNTO 0) := "1111";
-
     CONSTANT STORE : unsigned(3 DOWNTO 0) := "0110";
+    CONSTANT STORE_FROM_REG : unsigned(3 DOWNTO 0) := "0101";
+    CONSTANT LOAD : unsigned(3 DOWNTO 0) := "1000";
 
+    --REGISTERS
+    CONSTANT reg_acc : unsigned(2 DOWNTO 0) := "000";
+    CONSTANT reg_x : unsigned(2 DOWNTO 0) := "001";
+    CONSTANT reg_y : unsigned(2 DOWNTO 0) := "010";
+    CONSTANT reg_pointer : unsigned(2 DOWNTO 0) := "011";
     -- RAM
     SIGNAL ram_data_in : unsigned(15 DOWNTO 0);
     SIGNAL ram_address : unsigned(15 DOWNTO 0);
@@ -162,10 +166,14 @@ BEGIN
     );
 
     -- RAM
-    ram_write_en <= '1' WHEN opcode_sig = STORE ELSE '0';
+    ram_write_en <= '1' WHEN opcode_sig = STORE ELSE
+        '0';
     ram_data_in <= reg_data_a_sig;
-    ram_address <= to_unsigned(to_integer(data_output(9 DOWNTO 0)), 16) WHEN opcode_sig = STORE 
-        ELSE reg_data_a_sig WHEN (opcode_sig = ADD AND immediate_flag = '1') ELSE x"0000";
+    ram_address <= reg_data_b_sig WHEN opcode_sig = STORE_FROM_REG ELSE
+        to_unsigned(to_integer(data_output(9 DOWNTO 0)), 16) WHEN opcode_sig = STORE
+        ELSE
+        reg_data_a_sig WHEN (opcode_sig = ADD AND immediate_flag = '1') ELSE
+        x"0000";
 
     branch_sig <= '1' WHEN (opcode_sig = JMP AND state = "00") ELSE
         '1' WHEN (opcode_sig = BMI AND state = "00" AND C = '0') ELSE
@@ -203,7 +211,7 @@ BEGIN
         to_unsigned(to_integer(data_output(5 DOWNTO 3)), 3);
 
     write_data <= ram_data_out WHEN (opcode_sig = ADD AND selec_reg_a = "011") ELSE
-        to_unsigned(to_integer(immediate), 16) WHEN opcode_sig = "1000" ELSE
+        to_unsigned(to_integer(immediate), 16) WHEN opcode_sig = LOAD ELSE
         result;
 
     result_out <= result;

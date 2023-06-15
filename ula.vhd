@@ -35,7 +35,7 @@ BEGIN
         carry_minus WHEN op = "01" ELSE
         '0';
 
-    zero_out <= '1' WHEN data_in_a = data_in_b ELSE
+    zero_out <= '1' WHEN temp(15 DOWNTO 0) = 0 ELSE
         '0';
 
     carry_out <= carry;

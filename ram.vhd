@@ -13,7 +13,7 @@ ENTITY ram IS
 END ENTITY;
 ------------------------------------------------------------------------
 ARCHITECTURE a_ram OF ram IS
-    TYPE mem IS ARRAY (0 TO 127) OF unsigned(15 DOWNTO 0);
+    TYPE mem IS ARRAY (0 TO 512) OF unsigned(15 DOWNTO 0);
     SIGNAL ram_content : mem;
 BEGIN
     PROCESS (clk, wr_en)

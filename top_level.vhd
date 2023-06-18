@@ -166,7 +166,7 @@ BEGIN
     );
 
     -- RAM
-    ram_write_en <= '1' WHEN opcode_sig = STORE ELSE
+    ram_write_en <= '1' WHEN opcode_sig = STORE or opcode_sig = STORE_FROM_REG ELSE
         '0';
     ram_data_in <= reg_data_a_sig;
     ram_address <= reg_data_b_sig WHEN opcode_sig = STORE_FROM_REG ELSE
@@ -179,8 +179,10 @@ BEGIN
         '1' WHEN (opcode_sig = BMI AND state = "00" AND C = '0') ELSE
         '0';
 
-    write_en_reg <= '1' WHEN (state = "10" AND opcode_sig /= CMP)ELSE
-        '0';
+    write_en_reg <= '1' WHEN (state = "10" AND (opcode_sig = ADD OR 
+                                                opcode_sig = SUB OR 
+                                                opcode_sig = LOAD))
+        ELSE '0';
 
     op_sig <= "00" WHEN opcode_sig = ADD ELSE
         "01" WHEN opcode_sig = SUB ELSE

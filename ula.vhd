@@ -21,10 +21,10 @@ ARCHITECTURE A_ULA OF ULA IS
 BEGIN
 
     temp <= data_in_a + data_in_b WHEN op = "00" ELSE
-        data_in_a - data_in_b WHEN op = "01" ELSE
-        data_in_a - data_in_b WHEN op = "10" ELSE
-        data_in_a - data_in_b WHEN op = "11" ELSE -- 01 -> Subtração, 10 -> Comparação de Igual, 11 -> Comparação de Maior
-        "0000000000000000";
+            data_in_a - data_in_b WHEN op = "01" ELSE
+            "0000000000000001"    WHEN op = "10" AND data_in_a = data_in_b ELSE
+            "0000000000000001"    WHEN op = "11" AND data_in_a > data_in_b ELSE
+            "0000000000000000";
 
     carry_sum <= to_unsigned(to_integer(data_in_A), 17) + to_unsigned(to_integer(data_in_B), 17);
 

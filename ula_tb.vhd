@@ -13,7 +13,7 @@ ARCHITECTURE A_ULA_TB OF ULA_TB IS
             data_in_B : IN unsigned(15 DOWNTO 0);
             op : IN unsigned(3 DOWNTO 0);
             result_out : OUT unsigned(15 DOWNTO 0);
-            zero_out, negative_out, carry_out, overflow_out : OUT STD_LOGIC
+            zero_out, negative_out, carry_out : OUT STD_LOGIC
         );
     END COMPONENT;
 
@@ -21,7 +21,7 @@ ARCHITECTURE A_ULA_TB OF ULA_TB IS
     SIGNAL data_A, data_B : unsigned(15 DOWNTO 0);
     SIGNAL operation : unsigned(3 DOWNTO 0);
     SIGNAL result : unsigned(15 DOWNTO 0);
-    SIGNAL zero, negative, carry, overflow : STD_LOGIC;
+    SIGNAL zero, negative, carry : STD_LOGIC;
 
 BEGIN
     -- Instantiate the ULA component
@@ -33,8 +33,7 @@ BEGIN
         result_out => result,
         zero_out => zero,
         negative_out => negative,
-        carry_out => carry,
-        overflow_out => overflow
+        carry_out => carry
     );
 
     -- Stimulus process

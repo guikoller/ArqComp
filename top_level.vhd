@@ -19,7 +19,7 @@ ARCHITECTURE a_top_level OF top_level IS
             data_in_B : IN unsigned(15 DOWNTO 0);
             op : IN unsigned(1 DOWNTO 0);
             result_out : OUT unsigned(15 DOWNTO 0);
-            zero_out, negative_out, carry_out, overflow_out : OUT STD_LOGIC
+            zero_out, negative_out, carry_out : OUT STD_LOGIC
         );
     END COMPONENT;
 
@@ -52,8 +52,18 @@ ARCHITECTURE a_top_level OF top_level IS
         );
     END COMPONENT;
 
+    COMPONENT ram IS
+        PORT (
+            clk : IN STD_LOGIC;
+            address : IN unsigned(15 DOWNTO 0);
+            wr_en : IN STD_LOGIC;
+            data_in : IN unsigned(15 DOWNTO 0);
+            data_out : OUT unsigned(15 DOWNTO 0)
+        );
+    END COMPONENT;
+
     SIGNAL result : unsigned(15 DOWNTO 0);
-    SIGNAL zero, negative, carry, carry_in, overflow, immediate_flag, V, N, Z, C : STD_LOGIC;
+    SIGNAL zero, negative, carry, carry_in, immediate_flag, V, N, Z, C : STD_LOGIC;
     SIGNAL opcode_sig : unsigned(3 DOWNTO 0);
     SIGNAL state : unsigned(1 DOWNTO 0);
     SIGNAL selec_reg_a, selec_reg_b : unsigned(2 DOWNTO 0);
@@ -74,12 +84,25 @@ ARCHITECTURE a_top_level OF top_level IS
     CONSTANT NOP : unsigned(3 DOWNTO 0) := "0000";
     CONSTANT ADD : unsigned(3 DOWNTO 0) := "0001";
     CONSTANT SUB : unsigned(3 DOWNTO 0) := "0010";
-
     CONSTANT CLS : unsigned(3 DOWNTO 0) := "1010";
     CONSTANT CMP : unsigned(3 DOWNTO 0) := "0100";
-
     CONSTANT JMP : unsigned(3 DOWNTO 0) := "1110";
     CONSTANT BMI : unsigned(3 DOWNTO 0) := "1111";
+    CONSTANT STORE : unsigned(3 DOWNTO 0) := "0110";
+    CONSTANT STORE_FROM_REG : unsigned(3 DOWNTO 0) := "0101";
+    CONSTANT LOAD : unsigned(3 DOWNTO 0) := "1000";
+
+    --REGISTERS
+    CONSTANT reg_acc : unsigned(2 DOWNTO 0) := "000";
+    CONSTANT reg_x : unsigned(2 DOWNTO 0) := "001";
+    CONSTANT reg_y : unsigned(2 DOWNTO 0) := "010";
+    CONSTANT reg_pointer : unsigned(2 DOWNTO 0) := "011";
+    -- RAM
+    SIGNAL ram_data_in : unsigned(15 DOWNTO 0);
+    SIGNAL ram_address : unsigned(15 DOWNTO 0);
+    SIGNAL ram_data_out : unsigned(15 DOWNTO 0);
+    SIGNAL ram_write_en : STD_LOGIC := '0';
+
 BEGIN
     ula_inst : ULA
     PORT MAP(
@@ -89,8 +112,7 @@ BEGIN
         result_out => result,
         zero_out => zero,
         negative_out => negative,
-        carry_out => carry,
-        overflow_out => overflow
+        carry_out => carry
     );
 
     flags_reg : flags_register
@@ -101,7 +123,7 @@ BEGIN
         N_enable => en_N,
         Z_enable => en_Z,
         C_enable => en_C,
-        V_in => overflow,
+        V_in => '0',
         N_in => negative,
         Z_in => zero,
         C_in => carry_in,
@@ -134,12 +156,33 @@ BEGIN
         data_out => data_output
     );
 
+    ram_inst : ram
+    PORT MAP(
+        clk => clk,
+        address => ram_address,
+        wr_en => ram_write_en,
+        data_in => ram_data_in,
+        data_out => ram_data_out
+    );
+
+    -- RAM
+    ram_write_en <= '1' WHEN opcode_sig = STORE or opcode_sig = STORE_FROM_REG ELSE
+        '0';
+    ram_data_in <= reg_data_a_sig;
+    ram_address <= reg_data_b_sig WHEN opcode_sig = STORE_FROM_REG ELSE
+        to_unsigned(to_integer(data_output(9 DOWNTO 0)), 16) WHEN opcode_sig = STORE
+        ELSE
+        reg_data_a_sig WHEN (opcode_sig = ADD AND immediate_flag = '1') ELSE
+        x"0000";
+
     branch_sig <= '1' WHEN (opcode_sig = JMP AND state = "00") ELSE
         '1' WHEN (opcode_sig = BMI AND state = "00" AND C = '0') ELSE
         '0';
 
-    write_en_reg <= '1' WHEN (state = "10" AND opcode_sig /= CMP)ELSE
-        '0';
+    write_en_reg <= '1' WHEN (state = "10" AND (opcode_sig = ADD OR 
+                                                opcode_sig = SUB OR 
+                                                opcode_sig = LOAD))
+        ELSE '0';
 
     op_sig <= "00" WHEN opcode_sig = ADD ELSE
         "01" WHEN opcode_sig = SUB ELSE
@@ -166,10 +209,11 @@ BEGIN
         ELSE
         reg_data_b_sig;
 
-    selec_reg_write <= selec_reg_a WHEN immediate_flag = '1' ELSE
+    selec_reg_write <= selec_reg_a WHEN (immediate_flag = '1' AND selec_reg_a /= "011") ELSE
         to_unsigned(to_integer(data_output(5 DOWNTO 3)), 3);
 
-    write_data <= to_unsigned(to_integer(immediate), 16) WHEN opcode_sig = "1000" ELSE
+    write_data <= ram_data_out WHEN (opcode_sig = ADD AND selec_reg_a = "011") ELSE
+        to_unsigned(to_integer(immediate), 16) WHEN opcode_sig = LOAD ELSE
         result;
 
     result_out <= result;

@@ -38,7 +38,7 @@ BEGIN
 
     clk_process : PROCESS
     BEGIN
-        WHILE now < 10000 ns LOOP
+        WHILE now < 100000 ns LOOP
             clk <= '0';
             WAIT FOR 10 ns;
             clk <= '1';
